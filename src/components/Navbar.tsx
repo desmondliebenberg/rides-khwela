@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Car, Menu, X, User } from "lucide-react";
+import { Car, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,8 +39,17 @@ const Navbar = () => {
               <Link to="/about" className="text-gray-700 hover:text-khwela-blue font-medium">About Us</Link>
             </div>
             <div className="flex items-center space-x-3">
-              <Button variant="outline">Sign In</Button>
-              <Button className="bg-khwela-blue hover:bg-khwela-blue/90">Sign Up</Button>
+              <Button 
+                variant="outline" 
+                className="text-khwela-blue border-khwela-blue hover:bg-khwela-blue hover:text-white"
+              >
+                Sign In
+              </Button>
+              <Button 
+                className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
+              >
+                Sign Up
+              </Button>
             </div>
           </div>
 
@@ -67,8 +76,17 @@ const Navbar = () => {
           <Link to="/safety" className="text-gray-700 py-2 px-4 hover:bg-gray-100 rounded">Safety</Link>
           <Link to="/about" className="text-gray-700 py-2 px-4 hover:bg-gray-100 rounded">About Us</Link>
           <div className="flex flex-col space-y-2 mt-4">
-            <Button variant="outline" className="w-full">Sign In</Button>
-            <Button className="w-full bg-khwela-blue hover:bg-khwela-blue/90">Sign Up</Button>
+            <Button 
+              variant="outline" 
+              className="w-full text-khwela-blue border-khwela-blue hover:bg-khwela-blue hover:text-white"
+            >
+              Sign In
+            </Button>
+            <Button 
+              className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
+            >
+              Sign Up
+            </Button>
           </div>
         </div>
       </div>
