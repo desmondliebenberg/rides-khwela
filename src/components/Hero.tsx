@@ -27,7 +27,7 @@ const Hero = () => {
               <Button size="lg" className="bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90">
                 Request a Ride
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20">
                 Become a Driver
               </Button>
             </div>
@@ -35,30 +35,30 @@ const Hero = () => {
             {/* Hero stats */}
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
               <div className="flex items-center space-x-3">
-                <div className="bg-white/10 rounded-full p-2">
+                <div className="bg-white/20 rounded-full p-2">
                   <ShieldCheck className="text-khwela-gold" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Enhanced Safety</h3>
-                  <p className="text-sm text-white/70">Verified drivers</p>
+                  <h3 className="font-semibold text-white">Enhanced Safety</h3>
+                  <p className="text-sm text-white">Verified drivers</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="bg-white/10 rounded-full p-2">
+                <div className="bg-white/20 rounded-full p-2">
                   <Clock className="text-khwela-gold" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Reliable Service</h3>
-                  <p className="text-sm text-white/70">24/7 availability</p>
+                  <h3 className="font-semibold text-white">Reliable Service</h3>
+                  <p className="text-sm text-white">24/7 availability</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="bg-white/10 rounded-full p-2">
+                <div className="bg-white/20 rounded-full p-2">
                   <DollarSign className="text-khwela-gold" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Fair Pricing</h3>
-                  <p className="text-sm text-white/70">No surge charges</p>
+                  <h3 className="font-semibold text-white">Fair Pricing</h3>
+                  <p className="text-sm text-white">No surge charges</p>
                 </div>
               </div>
             </div>

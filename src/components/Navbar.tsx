@@ -32,16 +32,20 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-6">
-              <Link to="/" className="text-gray-700 hover:text-khwela-blue font-medium">Home</Link>
-              <Link to="/ride" className="text-gray-700 hover:text-khwela-blue font-medium">Request Ride</Link>
-              <Link to="/driver" className="text-gray-700 hover:text-khwela-blue font-medium">Become a Driver</Link>
-              <Link to="/safety" className="text-gray-700 hover:text-khwela-blue font-medium">Safety</Link>
-              <Link to="/about" className="text-gray-700 hover:text-khwela-blue font-medium">About Us</Link>
+              <Link to="/" className={`font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:text-khwela-gold transition-colors`}>Home</Link>
+              <Link to="/ride" className={`font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:text-khwela-gold transition-colors`}>Request Ride</Link>
+              <Link to="/driver" className={`font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:text-khwela-gold transition-colors`}>Become a Driver</Link>
+              <Link to="/safety" className={`font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:text-khwela-gold transition-colors`}>Safety</Link>
+              <Link to="/about" className={`font-medium ${scrolled ? 'text-gray-700' : 'text-white'} hover:text-khwela-gold transition-colors`}>About Us</Link>
             </div>
             <div className="flex items-center space-x-3">
               <Button 
                 variant="outline" 
-                className="text-khwela-blue border-khwela-blue hover:bg-khwela-blue hover:text-white"
+                className={`border-2 ${
+                  scrolled 
+                    ? "text-khwela-blue border-khwela-blue hover:bg-khwela-blue hover:text-white" 
+                    : "text-white border-white hover:bg-white hover:text-khwela-blue"
+                }`}
               >
                 Sign In
               </Button>
@@ -55,7 +59,7 @@ const Navbar = () => {
 
           {/* Mobile Nav Button */}
           <button
-            className="md:hidden text-gray-700"
+            className={`md:hidden ${scrolled ? 'text-gray-700' : 'text-white'}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
