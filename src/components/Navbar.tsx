@@ -2,7 +2,13 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Car, Menu, X, Globe } from "lucide-react";
+import { Car, Menu, X, Globe, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,8 +56,27 @@ const Navbar = () => {
             <div className="flex space-x-6">
               <Link to="/" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Home</Link>
               <Link to="/signup" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Driver Signup</Link>
-              <Link to="/badges" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Badges & Training</Link>
-              <Link to="/cash-rides" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Cash Rides</Link>
+              
+              {/* Driver Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger className={`flex items-center font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors focus-visible:outline-none`}>
+                  <span>Driver</span>
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
+                  <DropdownMenuItem asChild>
+                    <Link to="/badges" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                      Badges & Training
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/cash-rides" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                      Cash Rides
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              
               <Link to="/support" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Support</Link>
               <Link to="/refer" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Refer & Earn</Link>
             </div>
@@ -115,8 +140,14 @@ const Navbar = () => {
         <div className="container mx-auto px-4 flex flex-col space-y-4">
           <Link to="/" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Home</Link>
           <Link to="/signup" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Driver Signup</Link>
-          <Link to="/badges" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Badges & Training</Link>
-          <Link to="/cash-rides" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Cash Rides</Link>
+          
+          {/* Mobile Driver Dropdown Items - Displayed directly in the menu */}
+          <div className="border-t border-gray-100 pt-2 pl-4">
+            <p className="text-sm text-khwela-slate/70 mb-2">Driver Options</p>
+            <Link to="/badges" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Badges & Training</Link>
+            <Link to="/cash-rides" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Cash Rides</Link>
+          </div>
+          
           <Link to="/support" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Support</Link>
           <Link to="/refer" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Refer & Earn</Link>
           
