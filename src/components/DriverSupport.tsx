@@ -241,7 +241,7 @@ const DriverSupport = () => {
                       <p className="text-khwela-slate">
                         Payments are processed based on your badge level. Gold badge drivers receive instant daily payouts, 
                         Silver badge drivers can request daily payouts (with a small fee), and Bronze badge drivers receive weekly payouts.
-                        If you're missing a payment, please check your Badge level in the app. For urgent issues, contact support with your trip details.
+                        If you&apos;re missing a payment, please check your Badge level in the app. For urgent issues, contact support with your trip details.
                       </p>
                     </AccordionContent>
                   </AccordionItem>
@@ -259,7 +259,7 @@ const DriverSupport = () => {
                       </p>
                       <ol className="list-decimal pl-5 mt-2 space-y-1 text-khwela-slate">
                         <li>Go to your Driver Dashboard</li>
-                        <li>Tap "My Documents" section</li>
+                        <li>Tap &quot;My Documents&quot; section</li>
                         <li>Select the document you want to update</li>
                         <li>Upload a clear, legible photo of your new document</li>
                         <li>Submit for verification</li>
@@ -283,9 +283,9 @@ const DriverSupport = () => {
                       </p>
                       <ul className="list-disc pl-5 mt-2 space-y-1 text-khwela-slate">
                         <li>Remain calm and professional</li>
-                        <li>Complete the trip if it's safe to do so</li>
+                        <li>Complete the trip if it&apos;s safe to do so</li>
                         <li>After the trip, rate the rider honestly</li>
-                        <li>Report the incident using the "Report Rider" feature</li>
+                        <li>Report the incident using the &quot;Report Rider&quot; feature</li>
                         <li>If you feel unsafe at any point, you may end the trip early and contact our safety team</li>
                       </ul>
                       <p className="text-khwela-slate mt-2">
@@ -308,8 +308,8 @@ const DriverSupport = () => {
                       <ol className="list-decimal pl-5 mt-2 space-y-1 text-khwela-slate">
                         <li>Never share your login details with anyone</li>
                         <li>Report suspicious trip requests immediately</li>
-                        <li>Use the "Emergency" button for urgent situations</li>
-                        <li>For non-urgent fraud reports, go to "Help" > "Report Fraud"</li>
+                        <li>Use the &quot;Emergency&quot; button for urgent situations</li>
+                        <li>For non-urgent fraud reports, go to &quot;Help&quot; &gt; &quot;Report Fraud&quot;</li>
                         <li>Provide details including any messages, rider details, or trip information</li>
                       </ol>
                       <p className="text-khwela-slate mt-2">
@@ -338,7 +338,7 @@ const DriverSupport = () => {
                         <li>Keep your vehicle clean and well-maintained</li>
                       </ul>
                       <p className="text-khwela-slate mt-2">
-                        Badge reviews occur weekly. Visit the "Badges & Training" section to track your progress and see what you need to improve.
+                        Badge reviews occur weekly. Visit the &quot;Badges & Training&quot; section to track your progress and see what you need to improve.
                       </p>
                     </AccordionContent>
                   </AccordionItem>
@@ -346,7 +346,7 @@ const DriverSupport = () => {
                 
                 <div className="text-center mt-8">
                   <p className="text-khwela-slate mb-4">
-                    Can't find what you're looking for?
+                    Can&apos;t find what you&apos;re looking for?
                   </p>
                   <Button
                     className="bg-khwela-blue text-white hover:bg-khwela-blue/90"
