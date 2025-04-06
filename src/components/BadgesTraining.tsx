@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { 
   Award, 
@@ -7,7 +6,7 @@ import {
   Star, 
   Clock, 
   CarFront, 
-  Shower, 
+  Sparkles, 
   Wallet, 
   Users, 
   ShieldAlert, 
@@ -274,7 +273,7 @@ const BadgesTraining = () => {
               <AccordionTrigger className="px-6 py-4 hover:bg-gray-50">
                 <div className="flex items-center">
                   <div className="bg-khwela-light w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                    <Shower size={20} className="text-khwela-blue" />
+                    <Sparkles size={20} className="text-khwela-blue" />
                   </div>
                   <div className="text-left">
                     <h3 className="font-semibold text-khwela-blue">Hygiene & Presentation</h3>
