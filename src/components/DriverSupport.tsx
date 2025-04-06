@@ -14,7 +14,8 @@ import {
   Wallet, 
   FileText, 
   UserX, 
-  AlertTriangle
+  AlertTriangle,
+  Users
 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
