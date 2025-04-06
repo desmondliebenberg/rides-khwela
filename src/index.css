@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -107,5 +107,33 @@
   
   .feature-icon {
     @apply bg-khwela-light text-khwela-blue rounded-full w-12 h-12 flex items-center justify-center mb-4;
+  }
+
+  .badge-card {
+    @apply p-6 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow;
+  }
+
+  .badge-gold {
+    @apply bg-gradient-to-br from-yellow-300 to-yellow-500;
+  }
+
+  .badge-silver {
+    @apply bg-gradient-to-br from-gray-300 to-gray-400;
+  }
+
+  .badge-bronze {
+    @apply bg-gradient-to-br from-amber-600 to-amber-700;
+  }
+
+  .benefit-tile {
+    @apply p-5 bg-white rounded-lg shadow-md flex flex-col items-center text-center;
+  }
+  
+  .testimonial-card {
+    @apply p-6 rounded-xl bg-white shadow-md border border-gray-100;
+  }
+  
+  .trust-badge {
+    @apply flex items-center justify-center gap-2 py-2 px-4 bg-gray-100 rounded-full;
   }
 }

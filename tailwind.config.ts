@@ -20,8 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Montserrat', 'system-ui', 'sans-serif'],
-				body: ['Roboto', 'system-ui', 'sans-serif'],
+				sans: ['Poppins', 'system-ui', 'sans-serif'],
+				body: ['Inter', 'system-ui', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -30,10 +30,12 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				khwela: {
-					blue: '#0A3D62',
-					gold: '#F8C471',
-					dark: '#0F2137',
-					light: '#E7F1FF',
+					blue: '#0A3D62',     // Navy blue - primary brand color
+					gold: '#F8C471',     // Gold accent
+					dark: '#0F2137',     // Dark slate
+					light: '#E7F1FF',    // Light blue background
+					slate: '#4D5E6F',    // Slate gray for text
+					softBlack: '#222831', // Soft black for headings
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
