@@ -1,73 +1,62 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 214 100% 98%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 212 80% 22%;
+    --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 40 90% 71%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 40 90% 71%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 212 80% 22%;
+    --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222 47% 11%;
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 11%;
+    --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 11%;
+    --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
-    --primary-foreground: 222 47% 11%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 40 90% 71%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 40 90% 71%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -82,58 +71,79 @@
   * {
     @apply border-border;
   }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .feature-icon {
+    @apply bg-khwela-light text-khwela-blue p-3 rounded-full w-12 h-12 flex items-center justify-center;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-bold;
+  .benefit-tile {
+    @apply bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1;
+  }
+
+  .testimonial-card {
+    @apply bg-white p-6 rounded-lg shadow-sm border border-gray-100;
+  }
+
+  .trust-badge {
+    @apply flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-full border border-gray-100;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-10px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
   }
 }
 
 @layer components {
-  .glass-card {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg;
+  .bg-khwela-blue {
+    @apply bg-[#0F4C81];
   }
-  
-  .hero-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.8) 100%);
+  .text-khwela-blue {
+    @apply text-[#0F4C81];
   }
-  
-  .feature-icon {
-    @apply bg-khwela-light text-khwela-blue rounded-full w-12 h-12 flex items-center justify-center mb-4;
+  .bg-khwela-gold {
+    @apply bg-[#F5AB2D];
   }
-
-  .badge-card {
-    @apply p-6 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow;
+  .text-khwela-gold {
+    @apply text-[#F5AB2D];
   }
-
-  .badge-gold {
-    @apply bg-gradient-to-br from-yellow-300 to-yellow-500;
+  .bg-khwela-slate {
+    @apply bg-[#505969];
   }
-
-  .badge-silver {
-    @apply bg-gradient-to-br from-gray-300 to-gray-400;
+  .text-khwela-slate {
+    @apply text-[#505969];
   }
-
-  .badge-bronze {
-    @apply bg-gradient-to-br from-amber-600 to-amber-700;
+  .bg-khwela-light {
+    @apply bg-[#E5EEF6];
   }
-
-  .benefit-tile {
-    @apply p-5 bg-white rounded-lg shadow-md flex flex-col items-center text-center;
+  .text-khwela-light {
+    @apply text-[#E5EEF6];
   }
-  
-  .testimonial-card {
-    @apply p-6 rounded-xl bg-white shadow-md border border-gray-100;
+  .bg-khwela-dark {
+    @apply bg-[#1A2333];
   }
-  
-  .trust-badge {
-    @apply flex items-center justify-center gap-2 py-2 px-4 bg-gray-100 rounded-full;
+  .text-khwela-dark {
+    @apply text-[#1A2333];
   }
 }

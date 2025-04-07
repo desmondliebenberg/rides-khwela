@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { CheckCircle, Wallet, Clock, Shield } from "lucide-react";
@@ -11,17 +10,67 @@ const NewHero = () => {
 
   return (
     <div className="relative">
-      {/* Hero Background */}
+      {/* Hero Background with animated overlay */}
       <div className="absolute inset-0 bg-khwela-blue overflow-hidden">
+        {/* Main background with gradient overlay */}
         <div 
           className="absolute inset-0 bg-gradient-to-r from-khwela-blue/90 to-khwela-blue/70" 
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&q=80&w=1280')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1580880783109-6746d2252e5d?q=80&w=1964&auto=format&fit=crop')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             mixBlendMode: "overlay"
           }}
         ></div>
+        
+        {/* Animated elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Animated circles */}
+          <div className="absolute top-1/4 left-1/5 w-56 h-56 rounded-full bg-khwela-gold/10 animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-khwela-blue/20 animate-pulse" style={{animationDelay: "1s"}}></div>
+          <div className="absolute top-2/3 left-1/3 w-48 h-48 rounded-full bg-white/5 animate-pulse" style={{animationDelay: "1.5s"}}></div>
+          
+          {/* Animated gradient lines */}
+          <div className="absolute top-0 left-0 w-full h-full">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#fff" stopOpacity="0.05" />
+                  <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path 
+                d="M0,100 Q300,150 600,50 T1200,100" 
+                fill="none" 
+                stroke="url(#grad1)" 
+                strokeWidth="2"
+                className="animate-[pulse_4s_ease-in-out_infinite]"
+              />
+              <path 
+                d="M0,200 Q400,100 800,250 T1600,200" 
+                fill="none" 
+                stroke="url(#grad1)" 
+                strokeWidth="1.5"
+                className="animate-[pulse_6s_ease-in-out_infinite]"
+                style={{animationDelay: "2s"}}
+              />
+              <path 
+                d="M0,350 Q500,300 1000,350 T2000,300" 
+                fill="none" 
+                stroke="url(#grad1)" 
+                strokeWidth="2"
+                className="animate-[pulse_5s_ease-in-out_infinite]"
+                style={{animationDelay: "1s"}}
+              />
+            </svg>
+          </div>
+          
+          {/* Floating particles */}
+          <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-khwela-gold rounded-full animate-[float_8s_ease-in-out_infinite]"></div>
+          <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-white/40 rounded-full animate-[float_6s_ease-in-out_infinite]" style={{animationDelay: "2s"}}></div>
+          <div className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-khwela-gold/30 rounded-full animate-[float_10s_ease-in-out_infinite]" style={{animationDelay: "1s"}}></div>
+          <div className="absolute top-2/3 right-1/4 w-2 h-2 bg-white/30 rounded-full animate-[float_7s_ease-in-out_infinite]" style={{animationDelay: "3s"}}></div>
+        </div>
       </div>
 
       {/* Hero Content */}
@@ -35,13 +84,6 @@ const NewHero = () => {
             <p className="text-xl md:text-2xl text-white/90 mb-8 animate-slide-up">
               Earn more, drive safely, and stay protected with South Africa's most driver-first platform.
             </p>
-            <Button 
-              size="lg" 
-              className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 text-lg px-8 py-6 animate-slide-up"
-              onClick={scrollToSignup}
-            >
-              Sign Up to Drive
-            </Button>
           </div>
         </div>
       </div>

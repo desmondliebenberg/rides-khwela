@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Car, Menu, X, Globe, ChevronDown } from "lucide-react";
+import { Car, Menu, X, Globe, ChevronDown, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -104,14 +104,32 @@ const Navbar = () => {
                 className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
                 asChild
               >
-                <Link to="/login">Sign In</Link>
+                <Link to="/login">Log In</Link>
               </Button>
-              <Button 
-                className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
-                asChild
-              >
-                <Link to="/signup">Sign Up</Link>
-              </Button>
+              
+              {/* Sign Up Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90">
+                    Sign Up
+                    <ChevronDown className="ml-1 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
+                  <DropdownMenuItem asChild>
+                    <Link to="/rider-signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>For Riders</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                      <Car className="mr-2 h-4 w-4" />
+                      <span>For Drivers</span>
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -165,14 +183,31 @@ const Navbar = () => {
               className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
               asChild
             >
-              <Link to="/login">Sign In</Link>
+              <Link to="/login">Log In</Link>
             </Button>
-            <Button 
-              className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
-              asChild
-            >
-              <Link to="/signup">Sign Up</Link>
-            </Button>
+            
+            {/* Mobile Sign Up Options */}
+            <div className="border-t border-gray-100 pt-4 mt-2">
+              <p className="text-sm text-khwela-slate/70 mb-2 px-2">Sign Up As:</p>
+              <Button 
+                className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 mb-2"
+                asChild
+              >
+                <Link to="/rider-signup">
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Rider</span>
+                </Link>
+              </Button>
+              <Button 
+                className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
+                asChild
+              >
+                <Link to="/signup">
+                  <Car className="mr-2 h-4 w-4" />
+                  <span>Driver</span>
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 
 // New Pages
 import SignupPage from "./pages/SignupPage";
+import RiderSignupPage from "./pages/RiderSignupPage";
 import BadgesPage from "./pages/BadgesPage";
 import CashRidesPage from "./pages/CashRidesPage";
 import SupportPage from "./pages/SupportPage";
@@ -40,6 +41,7 @@ const App = () => (
           
           {/* New Routes */}
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/rider-signup" element={<RiderSignupPage />} />
           <Route path="/badges" element={<BadgesPage />} />
           <Route path="/cash-rides" element={<CashRidesPage />} />
           <Route path="/support" element={<SupportPage />} />
