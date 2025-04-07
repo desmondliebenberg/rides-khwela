@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -278,9 +279,9 @@ const DriverSignupForm = () => {
                                   className="hidden"
                                   onChange={(e) => handleFileChange(e, "driversLicense")}
                                 />
-                                <Label htmlFor="driversLicense" size="sm" variant="outline" className="mt-2 md:mt-0 cursor-pointer">
+                                <label htmlFor="driversLicense" className="mt-2 md:mt-0 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-primary underline-offset-4 hover:underline">
                                   <Upload size={14} className="mr-1" /> Upload
-                                </Label>
+                                </label>
                               </div>
                             </div>
                           </div>
@@ -306,9 +307,9 @@ const DriverSignupForm = () => {
                                   className="hidden"
                                   onChange={(e) => handleFileChange(e, "vehicleLicenseDisc")}
                                 />
-                                <Label htmlFor="vehicleLicenseDisc" size="sm" variant="outline" className="mt-2 md:mt-0 cursor-pointer">
+                                <label htmlFor="vehicleLicenseDisc" className="mt-2 md:mt-0 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-primary underline-offset-4 hover:underline">
                                   <Upload size={14} className="mr-1" /> Upload
-                                </Label>
+                                </label>
                               </div>
                             </div>
                           </div>
@@ -334,9 +335,9 @@ const DriverSignupForm = () => {
                                   className="hidden"
                                   onChange={(e) => handleFileChange(e, "policeClearance")}
                                 />
-                                <Label htmlFor="policeClearance" size="sm" variant="outline" className="mt-2 md:mt-0 cursor-pointer">
+                                <label htmlFor="policeClearance" className="mt-2 md:mt-0 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-primary underline-offset-4 hover:underline">
                                   <Upload size={14} className="mr-1" /> Upload
-                                </Label>
+                                </label>
                               </div>
                             </div>
                           </div>
@@ -362,9 +363,9 @@ const DriverSignupForm = () => {
                                   className="hidden"
                                   onChange={(e) => handleFileChange(e, "profilePhoto")}
                                 />
-                                <Label htmlFor="profilePhoto" size="sm" variant="outline" className="mt-2 md:mt-0 cursor-pointer">
+                                <label htmlFor="profilePhoto" className="mt-2 md:mt-0 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-primary underline-offset-4 hover:underline">
                                   <Upload size={14} className="mr-1" /> Upload
-                                </Label>
+                                </label>
                               </div>
                             </div>
                           </div>
