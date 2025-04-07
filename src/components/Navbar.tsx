@@ -55,7 +55,6 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-6">
               <Link to="/" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Home</Link>
-              <Link to="/signup" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Driver Signup</Link>
               
               {/* Driver Dropdown */}
               <DropdownMenu>
@@ -102,12 +101,7 @@ const Navbar = () => {
             
             <div className="flex items-center space-x-3">
               <Button 
-                variant="outline" 
-                className={`border-2 ${
-                  scrolled || alwaysScrolled 
-                    ? "text-khwela-blue border-khwela-blue hover:bg-khwela-blue hover:text-white" 
-                    : "text-white border-white hover:bg-white/20"
-                }`}
+                className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
                 asChild
               >
                 <Link to="/login">Sign In</Link>
@@ -116,7 +110,7 @@ const Navbar = () => {
                 className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
                 asChild
               >
-                <Link to="/signup">Sign Up to Drive</Link>
+                <Link to="/signup">Sign Up</Link>
               </Button>
             </div>
           </div>
@@ -139,7 +133,6 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 flex flex-col space-y-4">
           <Link to="/" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Home</Link>
-          <Link to="/signup" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Driver Signup</Link>
           
           {/* Mobile Driver Dropdown Items - Displayed directly in the menu */}
           <div className="border-t border-gray-100 pt-2 pl-4">
@@ -169,8 +162,7 @@ const Navbar = () => {
           
           <div className="flex flex-col space-y-2 mt-4">
             <Button 
-              variant="outline" 
-              className="w-full text-khwela-blue border-khwela-blue hover:bg-khwela-blue hover:text-white"
+              className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
               asChild
             >
               <Link to="/login">Sign In</Link>
@@ -179,7 +171,7 @@ const Navbar = () => {
               className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
               asChild
             >
-              <Link to="/signup">Sign Up to Drive</Link>
+              <Link to="/signup">Sign Up</Link>
             </Button>
           </div>
         </div>
