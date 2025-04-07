@@ -74,7 +74,10 @@ const NewHero = () => {
               <Button size="lg" className="bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90">
                 <Link to="/ride">Request a Ride</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20">
+              <Button 
+                size="lg" 
+                className="bg-white text-khwela-blue hover:bg-gray-100 border-2 border-white"
+              >
                 <Link to="/driver">Learn More</Link>
               </Button>
             </div>
