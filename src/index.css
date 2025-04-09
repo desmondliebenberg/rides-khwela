@@ -78,7 +78,7 @@
 
 @layer utilities {
   .feature-icon {
-    @apply bg-gray-100 text-blue-600 p-3 rounded-full w-12 h-12 flex items-center justify-center;
+    @apply bg-khwela-light text-khwela-green p-3 rounded-full w-12 h-12 flex items-center justify-center;
   }
 
   .benefit-tile {
@@ -102,6 +102,27 @@
     display: none;
   }
 
+  .rainbow-border {
+    @apply relative;
+    position: relative;
+  }
+  
+  .rainbow-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(90deg, 
+      #E03C31, #FF8C00, #FFD700, 
+      #007A4D, #002395, #4B0082, #8A2BE2);
+    border-radius: inherit;
+    z-index: -1;
+    animation: rainbow-shift 5s ease infinite;
+    background-size: 200% 200%;
+  }
+
   @keyframes float {
     0% {
       transform: translatey(0px);
@@ -116,5 +137,43 @@
 }
 
 @layer components {
-  /* Empty for now - we've removed the Khwela theme colors */
+  .bg-khwela-green {
+    @apply bg-[#007A4D];
+  }
+  .text-khwela-green {
+    @apply text-[#007A4D];
+  }
+  .bg-khwela-gold {
+    @apply bg-[#FFB81C];
+  }
+  .text-khwela-gold {
+    @apply text-[#FFB81C];
+  }
+  .bg-khwela-slate {
+    @apply bg-[#505969];
+  }
+  .text-khwela-slate {
+    @apply text-[#505969];
+  }
+  .bg-khwela-light {
+    @apply bg-[#F5F5F5];
+  }
+  .text-khwela-light {
+    @apply text-[#F5F5F5];
+  }
+  .bg-khwela-dark {
+    @apply bg-[#131313];
+  }
+  .text-khwela-dark {
+    @apply text-[#131313];
+  }
+  
+  .rainbow-gradient {
+    @apply bg-gradient-to-r from-khwela-rainbow-red via-khwela-rainbow-orange via-khwela-rainbow-yellow via-khwela-rainbow-green via-khwela-rainbow-blue via-khwela-rainbow-indigo to-khwela-rainbow-violet bg-[length:200%_auto] animate-rainbow-shift;
+  }
+  
+  .rainbow-text {
+    @apply text-transparent bg-clip-text rainbow-gradient;
+  }
 }
+

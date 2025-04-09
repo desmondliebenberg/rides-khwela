@@ -44,45 +44,48 @@ const Navbar = () => {
         scrolled || alwaysScrolled ? "py-2 bg-white/95 backdrop-blur-md shadow-md" : "py-4 bg-transparent"
       }`}
     >
+      {/* Rainbow accent line */}
+      <div className="absolute top-0 left-0 w-full h-1 rainbow-gradient"></div>
+      
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Car className={scrolled || alwaysScrolled ? "text-blue-600" : "text-white"} size={32} />
-            <span className={`text-2xl font-bold ${scrolled || alwaysScrolled ? 'text-blue-600' : 'text-white'}`}>Khwela</span>
+            <Car className={scrolled || alwaysScrolled ? "text-khwela-green" : "text-white"} size={32} />
+            <span className={`text-2xl font-bold ${scrolled || alwaysScrolled ? 'text-khwela-green' : 'text-white'}`}>Khwela</span>
           </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-6">
-              <Link to="/" className={`font-medium ${scrolled || alwaysScrolled ? 'text-gray-700' : 'text-white'} hover:text-blue-500 transition-colors`}>Home</Link>
+              <Link to="/" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Home</Link>
               
               {/* Driver Dropdown */}
               <DropdownMenu>
-                <DropdownMenuTrigger className={`flex items-center font-medium ${scrolled || alwaysScrolled ? 'text-gray-700' : 'text-white'} hover:text-blue-500 transition-colors focus-visible:outline-none`}>
+                <DropdownMenuTrigger className={`flex items-center font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors focus-visible:outline-none`}>
                   <span>Driver</span>
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
                   <DropdownMenuItem asChild>
-                    <Link to="/badges" className="flex w-full px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-sm cursor-pointer">
+                    <Link to="/badges" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
                       Badges & Training
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/cash-rides" className="flex w-full px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-sm cursor-pointer">
+                    <Link to="/cash-rides" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
                       Cash Rides
                     </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               
-              <Link to="/support" className={`font-medium ${scrolled || alwaysScrolled ? 'text-gray-700' : 'text-white'} hover:text-blue-500 transition-colors`}>Support</Link>
-              <Link to="/refer" className={`font-medium ${scrolled || alwaysScrolled ? 'text-gray-700' : 'text-white'} hover:text-blue-500 transition-colors`}>Refer & Earn</Link>
+              <Link to="/support" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Support</Link>
+              <Link to="/refer" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Refer & Earn</Link>
             </div>
             
             {/* Language Selector */}
             <div className="relative group">
-              <button className={`flex items-center gap-1 font-medium ${scrolled || alwaysScrolled ? 'text-gray-700' : 'text-white'} hover:text-blue-500 transition-colors`}>
+              <button className={`flex items-center gap-1 font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
                 <Globe size={16} />
                 <span>{language}</span>
               </button>
@@ -90,7 +93,7 @@ const Navbar = () => {
                 {languages.map((lang) => (
                   <button
                     key={lang}
-                    className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                    className="w-full text-left px-4 py-2 text-khwela-slate hover:bg-gray-100 transition-colors"
                     onClick={() => setLanguage(lang)}
                   >
                     {lang}
@@ -101,7 +104,7 @@ const Navbar = () => {
             
             <div className="flex items-center space-x-3">
               <Button 
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                className="bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90"
                 asChild
               >
                 <Link to="/login">Log In</Link>
@@ -110,20 +113,20 @@ const Navbar = () => {
               {/* Sign Up Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                  <Button className="bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90">
                     Sign Up
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
                   <DropdownMenuItem asChild>
-                    <Link to="/rider-signup" className="flex w-full px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-sm cursor-pointer">
+                    <Link to="/rider-signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
                       <User className="mr-2 h-4 w-4" />
                       <span>For Riders</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/signup" className="flex w-full px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-sm cursor-pointer">
+                    <Link to="/signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
                       <Car className="mr-2 h-4 w-4" />
                       <span>For Drivers</span>
                     </Link>
@@ -135,7 +138,7 @@ const Navbar = () => {
 
           {/* Mobile Nav Button */}
           <button
-            className={`md:hidden ${scrolled || alwaysScrolled ? 'text-gray-700' : 'text-white'}`}
+            className={`md:hidden ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -150,26 +153,26 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-4 flex flex-col space-y-4">
-          <Link to="/" className="text-gray-700 py-2 px-4 hover:bg-gray-100 rounded">Home</Link>
+          <Link to="/" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Home</Link>
           
           {/* Mobile Driver Dropdown Items - Displayed directly in the menu */}
           <div className="border-t border-gray-100 pt-2 pl-4">
-            <p className="text-sm text-gray-500 mb-2">Driver Options</p>
-            <Link to="/badges" className="block text-gray-700 py-2 px-4 hover:bg-gray-100 rounded">Badges & Training</Link>
-            <Link to="/cash-rides" className="block text-gray-700 py-2 px-4 hover:bg-gray-100 rounded">Cash Rides</Link>
+            <p className="text-sm text-khwela-slate/70 mb-2">Driver Options</p>
+            <Link to="/badges" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Badges & Training</Link>
+            <Link to="/cash-rides" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Cash Rides</Link>
           </div>
           
-          <Link to="/support" className="text-gray-700 py-2 px-4 hover:bg-gray-100 rounded">Support</Link>
-          <Link to="/refer" className="text-gray-700 py-2 px-4 hover:bg-gray-100 rounded">Refer & Earn</Link>
+          <Link to="/support" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Support</Link>
+          <Link to="/refer" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Refer & Earn</Link>
           
           {/* Mobile Language Selector */}
           <div className="py-2 px-4 border-t border-gray-100">
-            <p className="text-sm text-gray-500 mb-2">Select Language</p>
+            <p className="text-sm text-khwela-slate mb-2">Select Language</p>
             <div className="flex flex-col space-y-1">
               {languages.map((lang) => (
                 <button
                   key={lang}
-                  className={`text-left py-1 px-2 rounded ${language === lang ? 'bg-gray-100 text-blue-600' : 'text-gray-700'}`}
+                  className={`text-left py-1 px-2 rounded ${language === lang ? 'bg-khwela-light text-khwela-green' : 'text-khwela-slate'}`}
                   onClick={() => setLanguage(lang)}
                 >
                   {lang}
@@ -180,7 +183,7 @@ const Navbar = () => {
           
           <div className="flex flex-col space-y-2 mt-4">
             <Button 
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90"
               asChild
             >
               <Link to="/login">Log In</Link>
@@ -188,9 +191,9 @@ const Navbar = () => {
             
             {/* Mobile Sign Up Options */}
             <div className="border-t border-gray-100 pt-4 mt-2">
-              <p className="text-sm text-gray-500 mb-2 px-2">Sign Up As:</p>
+              <p className="text-sm text-khwela-slate/70 mb-2 px-2">Sign Up As:</p>
               <Button 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-2"
+                className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90 mb-2"
                 asChild
               >
                 <Link to="/rider-signup">
@@ -199,7 +202,7 @@ const Navbar = () => {
                 </Link>
               </Button>
               <Button 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90"
                 asChild
               >
                 <Link to="/signup">

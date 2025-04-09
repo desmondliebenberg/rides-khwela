@@ -29,6 +29,25 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				khwela: {
+					green: '#007A4D',     // Springbok green
+					gold: '#FFB81C',      // Springbok gold
+					white: '#FFFFFF',     // White
+					dark: '#131313',      // Dark for text
+					light: '#F5F5F5',     // Light background
+					slate: '#4D5E6F',     // Slate gray for text
+					red: '#E03C31',       // South African flag red
+					blue: '#002395',      // South African flag blue
+					rainbow: {
+						red: '#E03C31',
+						orange: '#FF8C00',
+						yellow: '#FFD700',
+						green: '#007A4D',
+						blue: '#002395',
+						indigo: '#4B0082',
+						violet: '#8A2BE2',
+					}
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -97,6 +116,11 @@ export default {
 				'pulse-slow': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.8' },
+				},
+				'rainbow-shift': {
+					'0%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' },
+					'100%': { backgroundPosition: '0% 50%' }
 				}
 			},
 			animation: {
@@ -105,9 +129,11 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out',
 				'slide-up': 'slide-up 0.6s ease-out',
 				'slide-right': 'slide-right 0.6s ease-out',
-				'pulse-slow': 'pulse-slow 3s infinite'
+				'pulse-slow': 'pulse-slow 3s infinite',
+				'rainbow-shift': 'rainbow-shift 5s ease infinite'
 			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
