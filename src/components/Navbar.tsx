@@ -1,13 +1,16 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Car, Menu, X, Globe, ChevronDown, User } from "lucide-react";
+import { Menu, X, Globe, ChevronDown, User } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [language, setLanguage] = useState("English");
   const location = useLocation();
+  
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -28,12 +31,18 @@ const Navbar = () => {
 
   // Language options
   const languages = ["English", "isiZulu", "Afrikaans"];
+  
   return <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled || alwaysScrolled ? "py-2 bg-white/95 backdrop-blur-md shadow-md" : "py-4 bg-transparent"}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Car size={32} className="text-khwela-blue bg-white rounded-none" />
-            <span className="text-2xl font-bold text-white">Khwela</span>
+            <div className="bg-khwela-blue rounded-sm h-8 w-10 flex items-center justify-center">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                <path d="M14 6l-4.5 4.5L14 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M19 6l-4.5 4.5L19 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <span className={`text-2xl font-bold ${scrolled || alwaysScrolled ? 'text-khwela-blue' : 'text-white'}`}>Khwela</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -100,7 +109,9 @@ const Navbar = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
-                      <Car className="mr-2 h-4 w-4" />
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" className="mr-2">
+                        <path d="M14 6l-4.5 4.5L14 15M19 6l-4.5 4.5L19 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
                       <span>For Drivers</span>
                     </Link>
                   </DropdownMenuItem>
@@ -157,7 +168,9 @@ const Navbar = () => {
               </Button>
               <Button className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
                 <Link to="/signup">
-                  <Car className="mr-2 h-4 w-4" />
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" className="mr-2">
+                    <path d="M14 6l-4.5 4.5L14 15M19 6l-4.5 4.5L19 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                   <span>Driver</span>
                 </Link>
               </Button>
@@ -167,4 +180,5 @@ const Navbar = () => {
       </div>
     </nav>;
 };
+
 export default Navbar;
