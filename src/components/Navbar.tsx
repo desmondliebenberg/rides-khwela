@@ -36,7 +36,7 @@ const Navbar = () => {
   const alwaysScrolled = !needsTransparentNav;
 
   // Language options
-  const languages = ["English", "isiZulu", "Afrikaans"];
+  const languages = ["English", "isiZulu", "Afrikaans", "Xhosa", "Sotho"];
 
   return (
     <nav
@@ -44,11 +44,14 @@ const Navbar = () => {
         scrolled || alwaysScrolled ? "py-2 bg-white/95 backdrop-blur-md shadow-md" : "py-4 bg-transparent"
       }`}
     >
+      {/* Rainbow accent line */}
+      <div className="absolute top-0 left-0 w-full h-1 rainbow-gradient"></div>
+      
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Car className="text-khwela-blue" size={32} />
-            <span className="text-2xl font-bold text-khwela-blue">Khwela</span>
+            <Car className={scrolled || alwaysScrolled ? "text-khwela-green" : "text-white"} size={32} />
+            <span className={`text-2xl font-bold ${scrolled || alwaysScrolled ? 'text-khwela-green' : 'text-white'}`}>Khwela</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -101,7 +104,7 @@ const Navbar = () => {
             
             <div className="flex items-center space-x-3">
               <Button 
-                className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
+                className="bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90"
                 asChild
               >
                 <Link to="/login">Log In</Link>
@@ -110,7 +113,7 @@ const Navbar = () => {
               {/* Sign Up Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90">
+                  <Button className="bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90">
                     Sign Up
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </Button>
@@ -169,7 +172,7 @@ const Navbar = () => {
               {languages.map((lang) => (
                 <button
                   key={lang}
-                  className={`text-left py-1 px-2 rounded ${language === lang ? 'bg-khwela-light text-khwela-blue' : 'text-khwela-slate'}`}
+                  className={`text-left py-1 px-2 rounded ${language === lang ? 'bg-khwela-light text-khwela-green' : 'text-khwela-slate'}`}
                   onClick={() => setLanguage(lang)}
                 >
                   {lang}
@@ -180,7 +183,7 @@ const Navbar = () => {
           
           <div className="flex flex-col space-y-2 mt-4">
             <Button 
-              className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
+              className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90"
               asChild
             >
               <Link to="/login">Log In</Link>
@@ -190,7 +193,7 @@ const Navbar = () => {
             <div className="border-t border-gray-100 pt-4 mt-2">
               <p className="text-sm text-khwela-slate/70 mb-2 px-2">Sign Up As:</p>
               <Button 
-                className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 mb-2"
+                className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90 mb-2"
                 asChild
               >
                 <Link to="/rider-signup">
@@ -199,7 +202,7 @@ const Navbar = () => {
                 </Link>
               </Button>
               <Button 
-                className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
+                className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90"
                 asChild
               >
                 <Link to="/signup">

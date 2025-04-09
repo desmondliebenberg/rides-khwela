@@ -7,21 +7,24 @@ const NewHero = () => {
   return (
     <div className="relative">
       {/* Hero Background with animated overlay */}
-      <div className="absolute inset-0 bg-khwela-blue overflow-hidden">
+      <div className="absolute inset-0 bg-khwela-green overflow-hidden">
         {/* Main background with gradient overlay */}
         <div 
-          className="absolute inset-0 bg-gradient-to-r from-khwela-blue/90 to-khwela-blue/70" 
+          className="absolute inset-0 bg-gradient-to-r from-khwela-green/90 to-khwela-green/70" 
           style={{
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         ></div>
         
+        {/* Rainbow accent line */}
+        <div className="absolute top-0 left-0 w-full h-2 rainbow-gradient"></div>
+        
         {/* Animated elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Animated circles */}
           <div className="absolute top-1/4 left-1/5 w-56 h-56 rounded-full bg-khwela-gold/10 animate-pulse"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-khwela-blue/20 animate-pulse" style={{animationDelay: "1s"}}></div>
+          <div className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-khwela-green/20 animate-pulse" style={{animationDelay: "1s"}}></div>
           <div className="absolute top-2/3 left-1/3 w-48 h-48 rounded-full bg-white/5 animate-pulse" style={{animationDelay: "1.5s"}}></div>
           
           {/* Animated gradient lines */}
@@ -70,13 +73,17 @@ const NewHero = () => {
               South Africa's most driver-first platform offering safe, reliable and transparent ride-hailing services.
             </p>
             
+            <div className="relative inline-block mb-8">
+              <div className="h-1 w-40 mx-auto rainbow-gradient rounded-full"></div>
+            </div>
+            
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
               <Button size="lg" className="bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90">
                 <Link to="/ride">Request a Ride</Link>
               </Button>
               <Button 
                 size="lg" 
-                className="bg-white text-khwela-blue hover:bg-gray-100 border-2 border-white"
+                className="bg-white text-khwela-green hover:bg-gray-100 border-2 border-white"
               >
                 <Link to="/driver">Learn More</Link>
               </Button>
@@ -94,7 +101,7 @@ const NewHero = () => {
               <div className="feature-icon mx-auto mb-4">
                 <ShieldCheck size={24} />
               </div>
-              <h3 className="text-lg font-semibold text-khwela-blue mb-2">Safety First</h3>
+              <h3 className="text-lg font-semibold text-khwela-green mb-2">Safety First</h3>
               <p className="text-khwela-slate">Facial Recognition + Verified Riders</p>
             </div>
             
@@ -103,7 +110,7 @@ const NewHero = () => {
               <div className="feature-icon mx-auto mb-4">
                 <Wallet size={24} />
               </div>
-              <h3 className="text-lg font-semibold text-khwela-blue mb-2">Fair Pricing</h3>
+              <h3 className="text-lg font-semibold text-khwela-green mb-2">Fair Pricing</h3>
               <p className="text-khwela-slate">Transparent rates with no surge pricing</p>
             </div>
             
@@ -112,7 +119,7 @@ const NewHero = () => {
               <div className="feature-icon mx-auto mb-4">
                 <Clock size={24} />
               </div>
-              <h3 className="text-lg font-semibold text-khwela-blue mb-2">Reliable Service</h3>
+              <h3 className="text-lg font-semibold text-khwela-green mb-2">Reliable Service</h3>
               <p className="text-khwela-slate">24/7 availability across South Africa</p>
             </div>
           </div>
