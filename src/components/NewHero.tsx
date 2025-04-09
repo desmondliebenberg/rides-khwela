@@ -7,24 +7,21 @@ const NewHero = () => {
   return (
     <div className="relative">
       {/* Hero Background with animated overlay */}
-      <div className="absolute inset-0 bg-khwela-green overflow-hidden">
+      <div className="absolute inset-0 bg-blue-600 overflow-hidden">
         {/* Main background with gradient overlay */}
         <div 
-          className="absolute inset-0 bg-gradient-to-r from-khwela-green/90 to-khwela-green/70" 
+          className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-blue-800/70" 
           style={{
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         ></div>
         
-        {/* Rainbow accent line */}
-        <div className="absolute top-0 left-0 w-full h-2 rainbow-gradient"></div>
-        
         {/* Animated elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Animated circles */}
-          <div className="absolute top-1/4 left-1/5 w-56 h-56 rounded-full bg-khwela-gold/10 animate-pulse"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-khwela-green/20 animate-pulse" style={{animationDelay: "1s"}}></div>
+          <div className="absolute top-1/4 left-1/5 w-56 h-56 rounded-full bg-blue-400/10 animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-blue-500/20 animate-pulse" style={{animationDelay: "1s"}}></div>
           <div className="absolute top-2/3 left-1/3 w-48 h-48 rounded-full bg-white/5 animate-pulse" style={{animationDelay: "1.5s"}}></div>
           
           {/* Animated gradient lines */}
@@ -55,9 +52,9 @@ const NewHero = () => {
           </div>
           
           {/* Floating particles */}
-          <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-khwela-gold rounded-full animate-[float_8s_ease-in-out_infinite]"></div>
+          <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-blue-300 rounded-full animate-[float_8s_ease-in-out_infinite]"></div>
           <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-white/40 rounded-full animate-[float_6s_ease-in-out_infinite]" style={{animationDelay: "2s"}}></div>
-          <div className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-khwela-gold/30 rounded-full animate-[float_10s_ease-in-out_infinite]" style={{animationDelay: "1s"}}></div>
+          <div className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-blue-300/30 rounded-full animate-[float_10s_ease-in-out_infinite]" style={{animationDelay: "1s"}}></div>
         </div>
       </div>
 
@@ -67,23 +64,23 @@ const NewHero = () => {
           <div className="max-w-2xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in">
               Khwela
-              <span className="block text-khwela-gold">Safe Rides, Better Journeys</span>
+              <span className="block text-blue-200">Safe Rides, Better Journeys</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 animate-slide-up max-w-lg mx-auto">
               South Africa's most driver-first platform offering safe, reliable and transparent ride-hailing services.
             </p>
             
             <div className="relative inline-block mb-8">
-              <div className="h-1 w-40 mx-auto rainbow-gradient rounded-full"></div>
+              <div className="h-1 w-40 mx-auto bg-blue-400 rounded-full"></div>
             </div>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-              <Button size="lg" className="bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90">
+              <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-white">
                 <Link to="/ride">Request a Ride</Link>
               </Button>
               <Button 
                 size="lg" 
-                className="bg-white text-khwela-green hover:bg-gray-100 border-2 border-white"
+                className="bg-white text-blue-600 hover:bg-gray-100 border-2 border-white"
               >
                 <Link to="/driver">Learn More</Link>
               </Button>
@@ -101,8 +98,8 @@ const NewHero = () => {
               <div className="feature-icon mx-auto mb-4">
                 <ShieldCheck size={24} />
               </div>
-              <h3 className="text-lg font-semibold text-khwela-green mb-2">Safety First</h3>
-              <p className="text-khwela-slate">Facial Recognition + Verified Riders</p>
+              <h3 className="text-lg font-semibold text-blue-600 mb-2">Safety First</h3>
+              <p className="text-gray-600">Facial Recognition + Verified Riders</p>
             </div>
             
             {/* Benefit 2 */}
@@ -110,8 +107,8 @@ const NewHero = () => {
               <div className="feature-icon mx-auto mb-4">
                 <Wallet size={24} />
               </div>
-              <h3 className="text-lg font-semibold text-khwela-green mb-2">Fair Pricing</h3>
-              <p className="text-khwela-slate">Transparent rates with no surge pricing</p>
+              <h3 className="text-lg font-semibold text-blue-600 mb-2">Fair Pricing</h3>
+              <p className="text-gray-600">Transparent rates with no surge pricing</p>
             </div>
             
             {/* Benefit 3 */}
@@ -119,8 +116,8 @@ const NewHero = () => {
               <div className="feature-icon mx-auto mb-4">
                 <Clock size={24} />
               </div>
-              <h3 className="text-lg font-semibold text-khwela-green mb-2">Reliable Service</h3>
-              <p className="text-khwela-slate">24/7 availability across South Africa</p>
+              <h3 className="text-lg font-semibold text-blue-600 mb-2">Reliable Service</h3>
+              <p className="text-gray-600">24/7 availability across South Africa</p>
             </div>
           </div>
         </div>

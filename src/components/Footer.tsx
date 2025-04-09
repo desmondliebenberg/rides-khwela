@@ -6,15 +6,12 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-khwela-dark text-white pt-16 pb-8">
-      {/* Rainbow accent line */}
-      <div className="absolute top-0 left-0 w-full h-1 rainbow-gradient"></div>
-      
+    <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <Car size={32} className="text-khwela-gold" />
+              <Car size={32} className="text-blue-400" />
               <span className="text-2xl font-bold">Khwela</span>
             </div>
             <p className="text-gray-400 mb-6">
@@ -36,21 +33,21 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link to="/" className="text-gray-400 hover:text-khwela-gold transition-colors">Home</Link></li>
-              <li><Link to="/ride" className="text-gray-400 hover:text-khwela-gold transition-colors">Request Ride</Link></li>
-              <li><Link to="/driver" className="text-gray-400 hover:text-khwela-gold transition-colors">Become a Driver</Link></li>
-              <li><Link to="/safety" className="text-gray-400 hover:text-khwela-gold transition-colors">Safety Features</Link></li>
-              <li><Link to="/about" className="text-gray-400 hover:text-khwela-gold transition-colors">About Us</Link></li>
+              <li><Link to="/" className="text-gray-400 hover:text-blue-400 transition-colors">Home</Link></li>
+              <li><Link to="/ride" className="text-gray-400 hover:text-blue-400 transition-colors">Request Ride</Link></li>
+              <li><Link to="/driver" className="text-gray-400 hover:text-blue-400 transition-colors">Become a Driver</Link></li>
+              <li><Link to="/safety" className="text-gray-400 hover:text-blue-400 transition-colors">Safety Features</Link></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-blue-400 transition-colors">About Us</Link></li>
             </ul>
           </div>
           
           <div>
             <h3 className="text-lg font-semibold mb-6">Legal</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-khwela-gold transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-khwela-gold transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-khwela-gold transition-colors">Cookie Policy</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-khwela-gold transition-colors">POPIA Compliance</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Terms of Service</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">Cookie Policy</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">POPIA Compliance</a></li>
             </ul>
           </div>
           
@@ -72,15 +69,7 @@ const Footer = () => {
           </div>
           <div className="mt-4 md:mt-0 flex items-center">
             <span>Proudly South African </span>
-            <span className="ml-2 w-6 h-6 inline-block relative overflow-hidden rounded-sm">
-              <div className="absolute top-0 left-0 w-full h-1/3 bg-khwela-rainbow-red"></div>
-              <div className="absolute top-1/3 left-0 w-full h-1/3 bg-white"></div>
-              <div className="absolute top-2/3 left-0 w-full h-1/3 bg-khwela-green"></div>
-              <div className="absolute top-0 left-0 w-1/3 h-full bg-khwela-gold"></div>
-              <div className="absolute top-0 left-1/3 border-t-[8px] border-l-[8px] border-t-khwela-green border-l-white"></div>
-              <div className="absolute top-0 right-0 border-b-[8px] border-r-[8px] border-b-khwela-rainbow-red border-r-white"></div>
-            </span>
-            <span className="ml-1">🇿🇦</span>
+            <span className="ml-2">🇿🇦</span>
           </div>
         </div>
       </div>
