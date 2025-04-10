@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -18,7 +17,9 @@ import {
   Calendar, 
   ChevronRight, 
   MapPin,
-  Star
+  Star,
+  Shield,
+  ClipboardCheck
 } from "lucide-react";
 
 const DriverDashboard = () => {
@@ -28,7 +29,6 @@ const DriverDashboard = () => {
     setDrivingActive(!drivingActive);
   };
 
-  // Sample data
   const driverName = "Themba Ndlovu";
   const driverStats = {
     tripsCompleted: 5,
@@ -110,12 +110,23 @@ const DriverDashboard = () => {
       expiry: null, 
       status: "verified" 
     },
+    { 
+      type: "insurance", 
+      title: "Insurance Document", 
+      expiry: "2023-12-15", 
+      status: "verified" 
+    },
+    { 
+      type: "dekra", 
+      title: "Dekra Report", 
+      expiry: "2023-09-30", 
+      status: "verified" 
+    },
   ];
 
   return (
     <div className="bg-gray-50 py-16">
       <div className="container mx-auto px-4">
-        {/* Dashboard Header */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
             <div>
@@ -144,9 +155,7 @@ const DriverDashboard = () => {
           </div>
         </div>
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* Trips Completed */}
           <Card>
             <CardContent className="p-6">
               <div className="flex justify-between items-start">
@@ -162,7 +171,6 @@ const DriverDashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Earnings */}
           <Card>
             <CardContent className="p-6">
               <div className="flex justify-between items-start">
@@ -178,7 +186,6 @@ const DriverDashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Rating */}
           <Card>
             <CardContent className="p-6">
               <div className="flex justify-between items-start">
@@ -200,7 +207,6 @@ const DriverDashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Badge */}
           <Card>
             <CardContent className="p-6">
               <div className="flex justify-between items-start">
@@ -217,7 +223,6 @@ const DriverDashboard = () => {
           </Card>
         </div>
 
-        {/* Quick Actions Panel */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light h-auto py-3">
             <PauseCircle size={18} className="mr-2" />
@@ -237,9 +242,7 @@ const DriverDashboard = () => {
           </Button>
         </div>
 
-        {/* Main Dashboard Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Trip History */}
           <div className="lg:col-span-2">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
@@ -303,7 +306,6 @@ const DriverDashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Upcoming Alerts */}
             <Card className="mt-8">
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-xl font-bold text-khwela-blue">Upcoming Compliance Alerts</CardTitle>
@@ -352,9 +354,7 @@ const DriverDashboard = () => {
             </Card>
           </div>
 
-          {/* Right Sidebar */}
           <div>
-            {/* My Documents */}
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-xl font-bold text-khwela-blue">My Documents</CardTitle>
@@ -371,6 +371,8 @@ const DriverDashboard = () => {
                         {doc.type === 'disc' && <Car size={20} className="text-khwela-blue" />}
                         {doc.type === 'clearance' && <FileText size={20} className="text-khwela-blue" />}
                         {doc.type === 'profile' && <CheckCircle size={20} className="text-khwela-blue" />}
+                        {doc.type === 'insurance' && <Shield size={20} className="text-khwela-blue" />}
+                        {doc.type === 'dekra' && <ClipboardCheck size={20} className="text-khwela-blue" />}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
@@ -409,7 +411,6 @@ const DriverDashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Performance */}
             <Card className="mt-8">
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-xl font-bold text-khwela-blue">Performance</CardTitle>
@@ -461,7 +462,6 @@ const DriverDashboard = () => {
           </div>
         </div>
 
-        {/* Earnings Summary */}
         <div className="mt-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">

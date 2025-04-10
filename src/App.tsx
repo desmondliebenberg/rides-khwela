@@ -21,7 +21,8 @@ import CashRidesPage from "./pages/CashRidesPage";
 import SupportPage from "./pages/SupportPage";
 import ReferPage from "./pages/ReferPage";
 import LoginPage from "./pages/LoginPage";
-import DashboardPage from "./pages/DashboardPage";
+import DriverDashboardPage from "./pages/DriverDashboardPage";
+import RiderDashboardPage from "./pages/RiderDashboardPage";
 import TermsPage from "./pages/TermsPage";
 
 const queryClient = new QueryClient();
@@ -47,7 +48,8 @@ const App = () => (
           <Route path="/support" element={<SupportPage />} />
           <Route path="/refer" element={<ReferPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/driver-dashboard" element={<DriverDashboardPage />} />
+          <Route path="/rider-dashboard" element={<RiderDashboardPage />} />
           <Route path="/terms" element={<TermsPage />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

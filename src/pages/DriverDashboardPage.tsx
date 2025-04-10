@@ -3,7 +3,7 @@ import DriverDashboard from "@/components/DriverDashboard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const DashboardPage = () => {
+const DriverDashboardPage = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -13,4 +13,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default DriverDashboardPage;

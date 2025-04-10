@@ -69,6 +69,11 @@ const Navbar = () => {
                       Cash Rides
                     </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/driver-dashboard" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                      Driver Dashboard
+                    </Link>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               
@@ -142,6 +147,13 @@ const Navbar = () => {
             <p className="text-sm text-khwela-slate/70 mb-2">Driver Options</p>
             <Link to="/badges" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Badges & Training</Link>
             <Link to="/cash-rides" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Cash Rides</Link>
+            <Link to="/driver-dashboard" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Driver Dashboard</Link>
+          </div>
+          
+          <div className="border-t border-gray-100 pt-2 pl-4">
+            <p className="text-sm text-khwela-slate/70 mb-2">Rider Options</p>
+            <Link to="/rider-dashboard" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Rider Dashboard</Link>
+            <Link to="/ride" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Book a Ride</Link>
           </div>
           
           <Link to="/support" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Support</Link>
