@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -255,7 +254,7 @@ const RiderDashboard = () => {
           <div className="lg:col-span-2">
             <Card>
               <CardHeader className="px-6 pt-6 pb-2">
-                <Tabs defaultValue="upcoming" value={activeTab} onValueChange={setActiveTab} className="w-full">
+                <Tabs defaultValue="upcoming" onValueChange={setActiveTab} className="w-full">
                   <div className="flex justify-between items-center">
                     <CardTitle className="text-xl font-bold text-khwela-blue">Your Rides</CardTitle>
                     <TabsList>
@@ -263,14 +262,13 @@ const RiderDashboard = () => {
                       <TabsTrigger value="history">History</TabsTrigger>
                     </TabsList>
                   </div>
-                </Tabs>
-              </CardHeader>
-              <CardContent className="px-6 py-4">
+                
                 <TabsContent value="upcoming" className="mt-0">
                   {upcomingRides.length > 0 ? (
                     <div className="space-y-4">
                       {upcomingRides.map((ride) => (
                         <div key={ride.id} className="border border-gray-100 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                          {/* Ride details */}
                           <div className="flex justify-between items-start mb-3">
                             <div>
                               <div className="flex items-center">
@@ -403,6 +401,148 @@ const RiderDashboard = () => {
                     </Button>
                   </div>
                 </TabsContent>
+                </Tabs>
+              </CardHeader>
+              <CardContent className="px-6 py-4">
+                {activeTab === "upcoming" ? (
+                  upcomingRides.length > 0 ? (
+                    <div className="space-y-4">
+                      {upcomingRides.map((ride) => (
+                        <div key={ride.id} className="border border-gray-100 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                          {/* Ride details */}
+                          <div className="flex justify-between items-start mb-3">
+                            <div>
+                              <div className="flex items-center">
+                                <Calendar size={16} className="text-khwela-blue mr-2" />
+                                <span className="text-sm font-medium text-khwela-slate">
+                                  {new Date(ride.date).toLocaleDateString('en-ZA')} • {ride.time}
+                                </span>
+                              </div>
+                              <h4 className="font-medium text-khwela-blue mt-1">{ride.id}</h4>
+                            </div>
+                            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+                              Scheduled
+                            </Badge>
+                          </div>
+                          <div className="space-y-2 mb-4">
+                            <div className="flex items-start">
+                              <div className="min-w-[24px] flex justify-center mt-1">
+                                <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                              </div>
+                              <div className="ml-2">
+                                <p className="text-sm font-medium text-khwela-slate">Pickup</p>
+                                <p className="text-sm text-khwela-blue">{ride.pickup}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start">
+                              <div className="min-w-[24px] flex justify-center mt-1">
+                                <div className="h-2 w-2 rounded-full bg-red-500"></div>
+                              </div>
+                              <div className="ml-2">
+                                <p className="text-sm font-medium text-khwela-slate">Dropoff</p>
+                                <p className="text-sm text-khwela-blue">{ride.dropoff}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="border-t border-gray-100 pt-3">
+                            <div className="flex items-center">
+                              <div className="h-8 w-8 rounded-full bg-khwela-light flex items-center justify-center">
+                                <User size={16} className="text-khwela-blue" />
+                              </div>
+                              <div className="ml-2">
+                                <p className="text-sm font-medium text-khwela-blue">{ride.driver.name}</p>
+                                <div className="flex items-center mt-0.5">
+                                  <Star size={12} className="text-yellow-500 fill-current" />
+                                  <span className="text-xs text-khwela-slate ml-1">{ride.driver.rating} • {ride.driver.car}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex mt-4">
+                            <Button variant="outline" size="sm" className="border-red-500 text-red-500 hover:bg-red-50 mr-2">
+                              Cancel
+                            </Button>
+                            <Button size="sm" className="bg-khwela-blue hover:bg-khwela-blue/90">
+                              View Details
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8">
+                      <Clock3 size={48} className="text-gray-300 mx-auto mb-4" />
+                      <h4 className="text-lg font-medium text-khwela-blue mb-2">No upcoming rides</h4>
+                      <p className="text-khwela-slate mb-4">You don't have any scheduled rides right now.</p>
+                      <Button asChild className="bg-khwela-blue hover:bg-khwela-blue/90">
+                        <a href="/ride">Book a Ride</a>
+                      </Button>
+                    </div>
+                  )
+                ) : (
+                  <div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr className="border-b border-gray-200">
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Date</th>
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Route</th>
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Fare</th>
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Driver</th>
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Rating</th>
+                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {recentRides.map((ride, index) => (
+                            <tr key={ride.id} className={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
+                              <td className="py-3 px-4">
+                                <div className="text-sm font-medium text-khwela-blue">
+                                  {new Date(ride.date).toLocaleDateString('en-ZA')}
+                                </div>
+                                <div className="text-xs text-khwela-slate">{ride.time}</div>
+                              </td>
+                              <td className="py-3 px-4">
+                                <div className="flex flex-col">
+                                  <div className="flex items-center">
+                                    <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
+                                    <span className="text-sm text-khwela-slate">{ride.pickup}</span>
+                                  </div>
+                                  <div className="flex items-center mt-1">
+                                    <div className="h-2 w-2 rounded-full bg-red-500 mr-2"></div>
+                                    <span className="text-sm text-khwela-slate">{ride.dropoff}</span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-3 px-4">
+                                <div className="text-sm font-medium text-khwela-blue">R{ride.fare}</div>
+                              </td>
+                              <td className="py-3 px-4">
+                                <div className="text-sm text-khwela-slate">{ride.driver}</div>
+                              </td>
+                              <td className="py-3 px-4">
+                                <div className="flex items-center">
+                                  <Star size={14} className="text-yellow-500 fill-current" />
+                                  <span className="ml-1 text-sm text-khwela-slate">{ride.rating}</span>
+                                </div>
+                              </td>
+                              <td className="py-3 px-4">
+                                <Button variant="ghost" size="sm" className="h-8 text-khwela-blue hover:text-khwela-blue/70">
+                                  Details
+                                </Button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="text-center mt-4">
+                      <Button variant="outline" className="text-khwela-blue border-khwela-blue hover:bg-khwela-light">
+                        <History size={16} className="mr-2" /> View All Rides
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
