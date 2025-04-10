@@ -36,10 +36,12 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-khwela-blue rounded-sm h-8 w-10 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
-                <path d="M14 6l-4.5 4.5L14 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M19 6l-4.5 4.5L19 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <div className={`${scrolled || alwaysScrolled ? 'bg-white' : 'bg-khwela-blue'} rounded-sm h-8 w-10 flex items-center justify-center`}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke={scrolled || alwaysScrolled ? "#0F4C81" : "#FFFFFF"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icon-tabler-car">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
               </svg>
             </div>
             <span className={`text-2xl font-bold ${scrolled || alwaysScrolled ? 'text-khwela-blue' : 'text-white'}`}>Khwela</span>
@@ -109,8 +111,11 @@ const Navbar = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" className="mr-2">
-                        <path d="M14 6l-4.5 4.5L14 15M19 6l-4.5 4.5L19 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
                       </svg>
                       <span>For Drivers</span>
                     </Link>
@@ -168,8 +173,11 @@ const Navbar = () => {
               </Button>
               <Button className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
                 <Link to="/signup">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" className="mr-2">
-                    <path d="M14 6l-4.5 4.5L14 15M19 6l-4.5 4.5L19 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
                   </svg>
                   <span>Driver</span>
                 </Link>
