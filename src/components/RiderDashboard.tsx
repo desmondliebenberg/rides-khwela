@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,6 +20,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const RiderDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -33,7 +33,6 @@ const RiderDashboard = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Sample data for demonstration
   const upcomingRides = [
     {
       id: 1,
