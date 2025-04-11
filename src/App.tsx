@@ -24,6 +24,9 @@ import LoginPage from "./pages/LoginPage";
 import DriverDashboardPage from "./pages/DriverDashboardPage";
 import RiderDashboardPage from "./pages/RiderDashboardPage";
 import TermsPage from "./pages/TermsPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import CookiePolicyPage from "./pages/CookiePolicyPage";
+import PopiaCompliancePage from "./pages/PopiaCompliancePage";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +54,9 @@ const App = () => (
           <Route path="/driver-dashboard" element={<DriverDashboardPage />} />
           <Route path="/rider-dashboard" element={<RiderDashboardPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+          <Route path="/popia-compliance" element={<PopiaCompliancePage />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

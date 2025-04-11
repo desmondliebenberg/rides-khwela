@@ -1,15 +1,36 @@
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Globe, ChevronDown, User } from "lucide-react";
+import { Menu, X, Globe, ChevronDown, User, MapPin } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
+// Simulated auth - in a real app, this would be replaced with proper auth state management
+const useAuth = () => {
+  // Check localStorage for a simulated auth token
+  const isLoggedIn = localStorage.getItem("khwela-auth") === "true";
+  const userType = localStorage.getItem("khwela-user-type") || "";
+  
+  const login = (type: string) => {
+    localStorage.setItem("khwela-auth", "true");
+    localStorage.setItem("khwela-user-type", type);
+  };
+  
+  const logout = () => {
+    localStorage.removeItem("khwela-auth");
+    localStorage.removeItem("khwela-user-type");
+  };
+  
+  return { isLoggedIn, userType, login, logout };
+};
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [language, setLanguage] = useState("English");
   const location = useLocation();
+  const navigate = useNavigate();
+  const { isLoggedIn, userType } = useAuth();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +49,15 @@ const Navbar = () => {
 
   // For pages without a hero image, we should always show the solid navbar
   const alwaysScrolled = !needsTransparentNav;
+
+  // Handle ride button click
+  const handleRideClick = () => {
+    if (isLoggedIn && userType === "rider") {
+      navigate("/ride");
+    } else {
+      navigate("/login?user=rider");
+    }
+  };
 
   // Language options
   const languages = ["English", "isiZulu", "Afrikaans"];
@@ -69,11 +99,13 @@ const Navbar = () => {
                       Cash Rides
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/driver-dashboard" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
-                      Driver Dashboard
-                    </Link>
-                  </DropdownMenuItem>
+                  {isLoggedIn && userType === "driver" && (
+                    <DropdownMenuItem asChild>
+                      <Link to="/driver-dashboard" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                        Driver Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                 </DropdownMenuContent>
               </DropdownMenu>
               
@@ -95,38 +127,80 @@ const Navbar = () => {
             </div>
             
             <div className="flex items-center space-x-3">
-              <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
-                <Link to="/login">Log In</Link>
+              {/* Ride Button */}
+              <Button 
+                className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 flex items-center"
+                onClick={handleRideClick}
+              >
+                <MapPin size={16} className="mr-1" />
+                Ride
               </Button>
-              
-              {/* Sign Up Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90">
-                    Sign Up
-                    <ChevronDown className="ml-1 h-4 w-4" />
+
+              {isLoggedIn ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="bg-khwela-blue text-white hover:bg-khwela-blue/90">
+                      My Account
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
+                    <DropdownMenuItem asChild>
+                      <Link to={userType === "rider" ? "/rider-dashboard" : "/driver-dashboard"} className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                        Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/refer" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                        Refer & Earn
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => {
+                      // Implement logout
+                      const auth = useAuth();
+                      auth.logout();
+                      window.location.href = "/";
+                    }} className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <>
+                  <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
+                    <Link to="/login">Log In</Link>
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
-                  <DropdownMenuItem asChild>
-                    <Link to="/rider-signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
-                      <User className="mr-2 h-4 w-4" />
-                      <span>For Riders</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                        <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                        <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
-                      </svg>
-                      <span>For Drivers</span>
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                  
+                  {/* Sign Up Dropdown */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90">
+                        Sign Up
+                        <ChevronDown className="ml-1 h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
+                      <DropdownMenuItem asChild>
+                        <Link to="/rider-signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                          <User className="mr-2 h-4 w-4" />
+                          <span>For Riders</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link to="/signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
+                          </svg>
+                          <span>For Drivers</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </>
+              )}
             </div>
           </div>
 
@@ -147,12 +221,16 @@ const Navbar = () => {
             <p className="text-sm text-khwela-slate/70 mb-2">Driver Options</p>
             <Link to="/badges" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Badges & Training</Link>
             <Link to="/cash-rides" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Cash Rides</Link>
-            <Link to="/driver-dashboard" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Driver Dashboard</Link>
+            {isLoggedIn && userType === "driver" && (
+              <Link to="/driver-dashboard" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Driver Dashboard</Link>
+            )}
           </div>
           
           <div className="border-t border-gray-100 pt-2 pl-4">
             <p className="text-sm text-khwela-slate/70 mb-2">Rider Options</p>
-            <Link to="/rider-dashboard" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Rider Dashboard</Link>
+            {isLoggedIn && userType === "rider" && (
+              <Link to="/rider-dashboard" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Rider Dashboard</Link>
+            )}
             <Link to="/ride" className="block text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Book a Ride</Link>
           </div>
           
@@ -170,31 +248,54 @@ const Navbar = () => {
           </div>
           
           <div className="flex flex-col space-y-2 mt-4">
-            <Button className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
-              <Link to="/login">Log In</Link>
-            </Button>
-            
-            {/* Mobile Sign Up Options */}
-            <div className="border-t border-gray-100 pt-4 mt-2">
-              <p className="text-sm text-khwela-slate/70 mb-2 px-2">Sign Up As:</p>
-              <Button className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 mb-2" asChild>
-                <Link to="/rider-signup">
-                  <User className="mr-2 h-4 w-4" />
-                  <span>Rider</span>
+            {isLoggedIn ? (
+              <>
+                <Link to={userType === "rider" ? "/rider-dashboard" : "/driver-dashboard"}>
+                  <Button className="w-full bg-khwela-blue text-white hover:bg-khwela-blue/90">
+                    My Dashboard
+                  </Button>
                 </Link>
-              </Button>
-              <Button className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
-                <Link to="/signup">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
-                  </svg>
-                  <span>Driver</span>
-                </Link>
-              </Button>
-            </div>
+                <Button 
+                  className="w-full bg-red-500 text-white hover:bg-red-600"
+                  onClick={() => {
+                    // Implement logout
+                    const auth = useAuth();
+                    auth.logout();
+                    window.location.href = "/";
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
+                  <Link to="/login">Log In</Link>
+                </Button>
+                
+                {/* Mobile Sign Up Options */}
+                <div className="border-t border-gray-100 pt-4 mt-2">
+                  <p className="text-sm text-khwela-slate/70 mb-2 px-2">Sign Up As:</p>
+                  <Button className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 mb-2" asChild>
+                    <Link to="/rider-signup">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Rider</span>
+                    </Link>
+                  </Button>
+                  <Button className="w-full bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
+                    <Link to="/signup">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
+                      </svg>
+                      <span>Driver</span>
+                    </Link>
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

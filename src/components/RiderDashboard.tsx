@@ -1,641 +1,667 @@
+
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Car, 
-  MapPin, 
-  Clock, 
-  CreditCard, 
-  Star, 
-  History,
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Car,
+  Clock,
+  MapPin,
+  CreditCard,
+  Star,
   Calendar,
-  ChevronRight,
-  Plus,
-  Heart,
-  Clock3,
-  Receipt,
   User,
-  Gift,
-  Settings,
-  HelpCircle
+  Shield,
+  Share2,
+  Copy,
+  CheckCircle,
+  Users
 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
 
 const RiderDashboard = () => {
-  const [activeTab, setActiveTab] = useState("upcoming");
+  const [activeTab, setActiveTab] = useState("overview");
+  const [copied, setCopied] = useState(false);
+  const referralLink = "https://khwela.app/ref/RIDER12345";
 
-  // Sample data
-  const riderName = "Lerato Khumalo";
-  const riderStats = {
-    totalRides: 28,
-    favoriteLocations: 5,
-    ratingAvg: 4.8,
-    loyaltyPoints: 320
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(referralLink);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
+  // Sample data for demonstration
   const upcomingRides = [
     {
-      id: "R-1234",
-      date: "2023-04-12",
-      time: "08:30",
-      pickup: "12 Jorissen St, Braamfontein",
-      dropoff: "Sandton City Mall",
-      status: "scheduled",
-      driver: {
-        name: "Themba Ndlovu",
-        rating: 4.9,
-        car: "Toyota Corolla (BG 42 FP GP)"
-      }
-    }
-  ];
-
-  const recentRides = [
-    {
-      id: "R-1230",
-      date: "2023-04-06",
-      time: "18:15",
-      pickup: "The Zone @ Rosebank",
-      dropoff: "Melville, 7th Street",
-      fare: 95,
-      rating: 5,
-      driver: "Sipho Molefe"
-    },
-    {
-      id: "R-1229",
-      date: "2023-04-04",
-      time: "08:45",
-      pickup: "Home",
-      dropoff: "44 Stanley Ave, Milpark",
-      fare: 78,
-      rating: 4,
-      driver: "Themba Ndlovu"
-    },
-    {
-      id: "R-1228",
-      date: "2023-04-01",
-      time: "20:30",
-      pickup: "Mall of Africa",
-      dropoff: "Home",
-      fare: 145,
-      rating: 5,
-      driver: "Thandeka Zulu"
-    }
-  ];
-
-  const favoriteLocations = [
-    { id: 1, name: "Home", address: "12 Jorissen St, Braamfontein", type: "home" },
-    { id: 2, name: "Work", address: "61 Katherine St, Sandton", type: "work" },
-    { id: 3, name: "Gym", address: "Virgin Active, Rosebank", type: "gym" },
-    { id: 4, name: "Mom's House", address: "234 Jan Smuts Ave, Parktown", type: "family" },
-    { id: 5, name: "Favorite Restaurant", address: "Marble Restaurant, Rosebank", type: "restaurant" }
-  ];
-
-  const promotions = [
-    {
       id: 1,
-      title: "10% Off Next 3 Rides",
-      description: "Use code WEEKEND10 for 10% off your next 3 rides this weekend.",
-      expiry: "2023-04-15",
-      code: "WEEKEND10"
+      from: "Canal Walk Shopping Centre",
+      to: "Cape Town International Airport",
+      date: "Apr 15, 2025",
+      time: "10:30 AM",
+      driverName: "Thabo M.",
+      driverRating: 4.9,
+      price: "R245",
+      status: "scheduled",
+    },
+  ];
+
+  const rideHistory = [
+    {
+      id: 1001,
+      from: "V&A Waterfront",
+      to: "Table Mountain",
+      date: "Apr 8, 2025",
+      time: "3:15 PM",
+      driverName: "Sipho N.",
+      driverRating: 4.8,
+      price: "R120",
+      status: "completed",
     },
     {
-      id: 2,
-      title: "Earn Double Points",
-      description: "Earn double loyalty points on all rides to airports this month.",
-      expiry: "2023-04-30",
-      code: null
-    }
+      id: 1002,
+      from: "Cape Town International Airport",
+      to: "The Westin Cape Town",
+      date: "Apr 3, 2025",
+      time: "7:45 PM",
+      driverName: "Jane D.",
+      driverRating: 4.7,
+      price: "R280",
+      status: "completed",
+    },
+    {
+      id: 1003,
+      from: "University of Cape Town",
+      to: "Long Street",
+      date: "Mar 28, 2025",
+      time: "9:30 PM",
+      driverName: "Michael R.",
+      driverRating: 5.0,
+      price: "R95",
+      status: "completed",
+    },
   ];
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+  };
 
   return (
-    <div className="bg-gray-50 py-16">
-      <div className="container mx-auto px-4">
-        {/* Dashboard Header */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-            <div>
-              <h1 className="text-3xl font-bold text-khwela-blue">
-                Welcome, {riderName}
-              </h1>
-              <p className="text-khwela-slate mt-1">
-                Where would you like to go today?
-              </p>
-            </div>
-            <div className="mt-4 md:mt-0 flex space-x-3">
-              <Button asChild className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90">
-                <a href="/ride">
-                  <Car size={16} className="mr-2" /> 
-                  Book a Ride
-                </a>
-              </Button>
-              <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light">
-                <Settings size={16} className="mr-2" />
-                Account Settings
-              </Button>
-            </div>
-          </div>
+    <div className="container mx-auto px-4 py-20">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-khwela-blue">Rider Dashboard</h1>
+          <p className="text-khwela-slate mt-2">Welcome back, Lebo!</p>
         </div>
-
-        {/* Quick Booking Card */}
-        <Card className="mb-8">
-          <CardContent className="p-6">
-            <h3 className="text-lg font-semibold text-khwela-blue mb-4">Quick Book</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="col-span-1 md:col-span-2 space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center rounded-md border border-gray-200 px-3 py-2">
-                    <MapPin size={18} className="text-khwela-blue mr-2" />
-                    <input type="text" placeholder="Enter pickup location" className="w-full bg-transparent border-0 focus:outline-none text-khwela-slate" />
-                  </div>
-                  <div className="flex items-center rounded-md border border-gray-200 px-3 py-2">
-                    <MapPin size={18} className="text-red-500 mr-2" />
-                    <input type="text" placeholder="Enter destination" className="w-full bg-transparent border-0 focus:outline-none text-khwela-slate" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center rounded-md border border-gray-200 px-3 py-2">
-                    <Calendar size={18} className="text-khwela-slate mr-2" />
-                    <input type="date" className="w-full bg-transparent border-0 focus:outline-none text-khwela-slate" />
-                  </div>
-                  <div className="flex items-center rounded-md border border-gray-200 px-3 py-2">
-                    <Clock size={18} className="text-khwela-slate mr-2" />
-                    <input type="time" className="w-full bg-transparent border-0 focus:outline-none text-khwela-slate" />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <Button className="w-full h-full bg-khwela-blue hover:bg-khwela-blue/90">
-                  <Car size={18} className="mr-2" />
-                  Find a Ride
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* Total Rides */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-sm font-medium text-khwela-slate mb-1">Total Rides</p>
-                  <h3 className="text-3xl font-bold text-khwela-blue">{riderStats.totalRides}</h3>
-                  <p className="text-xs text-khwela-slate mt-1">With Khwela</p>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-khwela-light flex items-center justify-center">
-                  <Car size={20} className="text-khwela-blue" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Favorite Locations */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-sm font-medium text-khwela-slate mb-1">Saved Places</p>
-                  <h3 className="text-3xl font-bold text-khwela-blue">{riderStats.favoriteLocations}</h3>
-                  <p className="text-xs text-khwela-slate mt-1">Favorite locations</p>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-khwela-light flex items-center justify-center">
-                  <Heart size={20} className="text-khwela-blue" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Rating */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-sm font-medium text-khwela-slate mb-1">Your Rating</p>
-                  <h3 className="text-3xl font-bold text-khwela-blue">{riderStats.ratingAvg}</h3>
-                  <div className="flex items-center text-yellow-500 mt-1">
-                    <Star size={12} className="fill-current" />
-                    <Star size={12} className="fill-current" />
-                    <Star size={12} className="fill-current" />
-                    <Star size={12} className="fill-current" />
-                    <Star size={12} className="fill-current" />
-                  </div>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-khwela-light flex items-center justify-center">
-                  <Star size={20} className="text-khwela-blue" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Loyalty Points */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-sm font-medium text-khwela-slate mb-1">Loyalty Points</p>
-                  <h3 className="text-3xl font-bold text-khwela-blue">{riderStats.loyaltyPoints}</h3>
-                  <p className="text-xs text-green-600 mt-1">Redeem for discounts</p>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-khwela-light flex items-center justify-center">
-                  <Gift size={20} className="text-khwela-blue" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        <div className="mt-4 md:mt-0">
+          <Button 
+            onClick={() => window.location.href = "/ride"} 
+            className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90"
+          >
+            <Car className="mr-2 h-4 w-4" /> Book a Ride
+          </Button>
         </div>
+      </div>
 
-        {/* Rides Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {/* Ride History & Upcoming */}
-          <div className="lg:col-span-2">
+      <Tabs defaultValue={activeTab} onValueChange={handleTabChange} className="space-y-6">
+        <TabsList className="bg-gray-100 p-1">
+          <TabsTrigger value="overview" className="data-[state=active]:bg-white">
+            Overview
+          </TabsTrigger>
+          <TabsTrigger value="rides" className="data-[state=active]:bg-white">
+            My Rides
+          </TabsTrigger>
+          <TabsTrigger value="payment" className="data-[state=active]:bg-white">
+            Payment Methods
+          </TabsTrigger>
+          <TabsTrigger value="profile" className="data-[state=active]:bg-white">
+            Profile
+          </TabsTrigger>
+          <TabsTrigger value="refer" className="data-[state=active]:bg-white">
+            Refer & Earn
+          </TabsTrigger>
+        </TabsList>
+
+        {activeTab === "overview" && (
+          <TabsContent value="overview" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">Total Rides</CardTitle>
+                  <CardDescription>Your lifetime rides</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center space-x-2">
+                    <Car className="text-khwela-blue h-5 w-5" />
+                    <span className="text-3xl font-bold text-khwela-blue">24</span>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">Favorite Destination</CardTitle>
+                  <CardDescription>Where you ride most</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="text-khwela-blue h-5 w-5" />
+                    <span className="text-xl font-medium text-khwela-blue">V&A Waterfront</span>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">Rider Rating</CardTitle>
+                  <CardDescription>Your average rating</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center space-x-2">
+                    <Star className="text-yellow-500 h-5 w-5 fill-yellow-500" />
+                    <span className="text-3xl font-bold text-khwela-blue">4.9</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
             <Card>
-              <CardHeader className="px-6 pt-6 pb-2">
-                <Tabs defaultValue="upcoming" onValueChange={setActiveTab} className="w-full">
-                  <div className="flex justify-between items-center">
-                    <CardTitle className="text-xl font-bold text-khwela-blue">Your Rides</CardTitle>
-                    <TabsList>
-                      <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-                      <TabsTrigger value="history">History</TabsTrigger>
-                    </TabsList>
-                  </div>
-                
-                <TabsContent value="upcoming" className="mt-0">
-                  {upcomingRides.length > 0 ? (
-                    <div className="space-y-4">
-                      {upcomingRides.map((ride) => (
-                        <div key={ride.id} className="border border-gray-100 rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                          {/* Ride details */}
-                          <div className="flex justify-between items-start mb-3">
-                            <div>
-                              <div className="flex items-center">
-                                <Calendar size={16} className="text-khwela-blue mr-2" />
-                                <span className="text-sm font-medium text-khwela-slate">
-                                  {new Date(ride.date).toLocaleDateString('en-ZA')} • {ride.time}
-                                </span>
-                              </div>
-                              <h4 className="font-medium text-khwela-blue mt-1">{ride.id}</h4>
-                            </div>
-                            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
-                              Scheduled
-                            </Badge>
-                          </div>
-                          <div className="space-y-2 mb-4">
-                            <div className="flex items-start">
-                              <div className="min-w-[24px] flex justify-center mt-1">
-                                <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                              </div>
-                              <div className="ml-2">
-                                <p className="text-sm font-medium text-khwela-slate">Pickup</p>
-                                <p className="text-sm text-khwela-blue">{ride.pickup}</p>
-                              </div>
-                            </div>
-                            <div className="flex items-start">
-                              <div className="min-w-[24px] flex justify-center mt-1">
-                                <div className="h-2 w-2 rounded-full bg-red-500"></div>
-                              </div>
-                              <div className="ml-2">
-                                <p className="text-sm font-medium text-khwela-slate">Dropoff</p>
-                                <p className="text-sm text-khwela-blue">{ride.dropoff}</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="border-t border-gray-100 pt-3">
-                            <div className="flex items-center">
-                              <div className="h-8 w-8 rounded-full bg-khwela-light flex items-center justify-center">
-                                <User size={16} className="text-khwela-blue" />
-                              </div>
-                              <div className="ml-2">
-                                <p className="text-sm font-medium text-khwela-blue">{ride.driver.name}</p>
-                                <div className="flex items-center mt-0.5">
-                                  <Star size={12} className="text-yellow-500 fill-current" />
-                                  <span className="text-xs text-khwela-slate ml-1">{ride.driver.rating} • {ride.driver.car}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex mt-4">
-                            <Button variant="outline" size="sm" className="border-red-500 text-red-500 hover:bg-red-50 mr-2">
-                              Cancel
-                            </Button>
-                            <Button size="sm" className="bg-khwela-blue hover:bg-khwela-blue/90">
-                              View Details
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <Clock3 size={48} className="text-gray-300 mx-auto mb-4" />
-                      <h4 className="text-lg font-medium text-khwela-blue mb-2">No upcoming rides</h4>
-                      <p className="text-khwela-slate mb-4">You don't have any scheduled rides right now.</p>
-                      <Button asChild className="bg-khwela-blue hover:bg-khwela-blue/90">
-                        <a href="/ride">Book a Ride</a>
-                      </Button>
-                    </div>
-                  )}
-                </TabsContent>
-                <TabsContent value="history" className="mt-0">
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
-                      <thead>
-                        <tr className="border-b border-gray-200">
-                          <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Date</th>
-                          <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Route</th>
-                          <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Fare</th>
-                          <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Driver</th>
-                          <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Rating</th>
-                          <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {recentRides.map((ride, index) => (
-                          <tr key={ride.id} className={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
-                            <td className="py-3 px-4">
-                              <div className="text-sm font-medium text-khwela-blue">
-                                {new Date(ride.date).toLocaleDateString('en-ZA')}
-                              </div>
-                              <div className="text-xs text-khwela-slate">{ride.time}</div>
-                            </td>
-                            <td className="py-3 px-4">
-                              <div className="flex flex-col">
-                                <div className="flex items-center">
-                                  <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
-                                  <span className="text-sm text-khwela-slate">{ride.pickup}</span>
-                                </div>
-                                <div className="flex items-center mt-1">
-                                  <div className="h-2 w-2 rounded-full bg-red-500 mr-2"></div>
-                                  <span className="text-sm text-khwela-slate">{ride.dropoff}</span>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="py-3 px-4">
-                              <div className="text-sm font-medium text-khwela-blue">R{ride.fare}</div>
-                            </td>
-                            <td className="py-3 px-4">
-                              <div className="text-sm text-khwela-slate">{ride.driver}</div>
-                            </td>
-                            <td className="py-3 px-4">
-                              <div className="flex items-center">
-                                <Star size={14} className="text-yellow-500 fill-current" />
-                                <span className="ml-1 text-sm text-khwela-slate">{ride.rating}</span>
-                              </div>
-                            </td>
-                            <td className="py-3 px-4">
-                              <Button variant="ghost" size="sm" className="h-8 text-khwela-blue hover:text-khwela-blue/70">
-                                Details
-                              </Button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="text-center mt-4">
-                    <Button variant="outline" className="text-khwela-blue border-khwela-blue hover:bg-khwela-light">
-                      <History size={16} className="mr-2" /> View All Rides
-                    </Button>
-                  </div>
-                </TabsContent>
-                </Tabs>
+              <CardHeader>
+                <CardTitle>Upcoming Rides</CardTitle>
+                <CardDescription>Your scheduled rides</CardDescription>
               </CardHeader>
-              <CardContent className="px-6 py-4">
-                {activeTab === "upcoming" ? (
-                  upcomingRides.length > 0 ? (
-                    <div className="space-y-4">
-                      {upcomingRides.map((ride) => (
-                        <div key={ride.id} className="border border-gray-100 rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                          {/* Ride details */}
-                          <div className="flex justify-between items-start mb-3">
-                            <div>
-                              <div className="flex items-center">
-                                <Calendar size={16} className="text-khwela-blue mr-2" />
-                                <span className="text-sm font-medium text-khwela-slate">
-                                  {new Date(ride.date).toLocaleDateString('en-ZA')} • {ride.time}
-                                </span>
-                              </div>
-                              <h4 className="font-medium text-khwela-blue mt-1">{ride.id}</h4>
+              <CardContent>
+                {upcomingRides.length > 0 ? (
+                  <div className="space-y-4">
+                    {upcomingRides.map((ride) => (
+                      <div key={ride.id} className="border rounded-lg p-4">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between">
+                          <div>
+                            <div className="flex items-center space-x-2 mb-2">
+                              <Calendar size={16} className="text-khwela-blue" />
+                              <span className="text-sm text-khwela-slate">{ride.date} at {ride.time}</span>
                             </div>
-                            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
-                              Scheduled
+                            <div className="flex items-start space-x-2 mb-1">
+                              <MapPin size={16} className="text-green-500 mt-1" />
+                              <div>
+                                <span className="text-xs text-gray-500">From</span>
+                                <p className="text-khwela-blue font-medium">{ride.from}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start space-x-2 mb-1">
+                              <MapPin size={16} className="text-red-500 mt-1" />
+                              <div>
+                                <span className="text-xs text-gray-500">To</span>
+                                <p className="text-khwela-blue font-medium">{ride.to}</p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="mt-4 md:mt-0 flex flex-col items-end">
+                            <Badge variant="outline" className="mb-2 bg-blue-50">
+                              <Clock size={12} className="mr-1" /> {ride.status === "scheduled" ? "Scheduled" : "En Route"}
                             </Badge>
-                          </div>
-                          <div className="space-y-2 mb-4">
-                            <div className="flex items-start">
-                              <div className="min-w-[24px] flex justify-center mt-1">
-                                <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                            <div className="text-lg font-bold text-khwela-blue">{ride.price}</div>
+                            <div className="flex items-center mt-2">
+                              <div className="flex items-center mr-2">
+                                <Star size={12} className="text-yellow-500 fill-yellow-500" />
+                                <span className="text-sm ml-1">{ride.driverRating}</span>
                               </div>
-                              <div className="ml-2">
-                                <p className="text-sm font-medium text-khwela-slate">Pickup</p>
-                                <p className="text-sm text-khwela-blue">{ride.pickup}</p>
-                              </div>
+                              <span className="text-sm text-khwela-slate">{ride.driverName}</span>
                             </div>
-                            <div className="flex items-start">
-                              <div className="min-w-[24px] flex justify-center mt-1">
-                                <div className="h-2 w-2 rounded-full bg-red-500"></div>
-                              </div>
-                              <div className="ml-2">
-                                <p className="text-sm font-medium text-khwela-slate">Dropoff</p>
-                                <p className="text-sm text-khwela-blue">{ride.dropoff}</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="border-t border-gray-100 pt-3">
-                            <div className="flex items-center">
-                              <div className="h-8 w-8 rounded-full bg-khwela-light flex items-center justify-center">
-                                <User size={16} className="text-khwela-blue" />
-                              </div>
-                              <div className="ml-2">
-                                <p className="text-sm font-medium text-khwela-blue">{ride.driver.name}</p>
-                                <div className="flex items-center mt-0.5">
-                                  <Star size={12} className="text-yellow-500 fill-current" />
-                                  <span className="text-xs text-khwela-slate ml-1">{ride.driver.rating} • {ride.driver.car}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex mt-4">
-                            <Button variant="outline" size="sm" className="border-red-500 text-red-500 hover:bg-red-50 mr-2">
-                              Cancel
-                            </Button>
-                            <Button size="sm" className="bg-khwela-blue hover:bg-khwela-blue/90">
-                              View Details
-                            </Button>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <Clock3 size={48} className="text-gray-300 mx-auto mb-4" />
-                      <h4 className="text-lg font-medium text-khwela-blue mb-2">No upcoming rides</h4>
-                      <p className="text-khwela-slate mb-4">You don't have any scheduled rides right now.</p>
-                      <Button asChild className="bg-khwela-blue hover:bg-khwela-blue/90">
-                        <a href="/ride">Book a Ride</a>
-                      </Button>
-                    </div>
-                  )
+                        
+                        <div className="flex justify-end mt-4 space-x-2">
+                          <Button variant="outline" size="sm">Cancel</Button>
+                          <Button size="sm" className="bg-khwela-blue">View Details</Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 ) : (
-                  <div>
-                    <div className="overflow-x-auto">
-                      <table className="w-full border-collapse">
-                        <thead>
-                          <tr className="border-b border-gray-200">
-                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Date</th>
-                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Route</th>
-                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Fare</th>
-                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Driver</th>
-                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate">Rating</th>
-                            <th className="text-left py-3 px-4 text-xs font-semibold text-khwela-slate"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {recentRides.map((ride, index) => (
-                            <tr key={ride.id} className={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
-                              <td className="py-3 px-4">
-                                <div className="text-sm font-medium text-khwela-blue">
-                                  {new Date(ride.date).toLocaleDateString('en-ZA')}
-                                </div>
-                                <div className="text-xs text-khwela-slate">{ride.time}</div>
-                              </td>
-                              <td className="py-3 px-4">
-                                <div className="flex flex-col">
-                                  <div className="flex items-center">
-                                    <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
-                                    <span className="text-sm text-khwela-slate">{ride.pickup}</span>
-                                  </div>
-                                  <div className="flex items-center mt-1">
-                                    <div className="h-2 w-2 rounded-full bg-red-500 mr-2"></div>
-                                    <span className="text-sm text-khwela-slate">{ride.dropoff}</span>
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="py-3 px-4">
-                                <div className="text-sm font-medium text-khwela-blue">R{ride.fare}</div>
-                              </td>
-                              <td className="py-3 px-4">
-                                <div className="text-sm text-khwela-slate">{ride.driver}</div>
-                              </td>
-                              <td className="py-3 px-4">
-                                <div className="flex items-center">
-                                  <Star size={14} className="text-yellow-500 fill-current" />
-                                  <span className="ml-1 text-sm text-khwela-slate">{ride.rating}</span>
-                                </div>
-                              </td>
-                              <td className="py-3 px-4">
-                                <Button variant="ghost" size="sm" className="h-8 text-khwela-blue hover:text-khwela-blue/70">
-                                  Details
-                                </Button>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="text-center mt-4">
-                      <Button variant="outline" className="text-khwela-blue border-khwela-blue hover:bg-khwela-light">
-                        <History size={16} className="mr-2" /> View All Rides
-                      </Button>
-                    </div>
+                  <div className="text-center py-10">
+                    <Calendar className="mx-auto h-10 w-10 text-gray-400 mb-3" />
+                    <h3 className="text-lg font-medium text-khwela-blue mb-1">No Upcoming Rides</h3>
+                    <p className="text-khwela-slate mb-4">You don't have any scheduled rides yet.</p>
+                    <Button onClick={() => window.location.href = "/ride"}>Book a Ride</Button>
                   </div>
                 )}
               </CardContent>
             </Card>
-          </div>
-
-          {/* Right Sidebar */}
-          <div>
-            {/* Saved Locations */}
-            <Card className="mb-6">
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-xl font-bold text-khwela-blue">Saved Places</CardTitle>
-                <Button variant="ghost" size="sm" className="text-khwela-blue hover:text-khwela-blue/70">
-                  Manage
-                </Button>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {favoriteLocations.slice(0, 3).map((location) => (
-                    <div key={location.id} className="flex items-center p-3 rounded-lg hover:bg-gray-50">
-                      <div className="h-10 w-10 rounded-full bg-khwela-light flex items-center justify-center mr-3 flex-shrink-0">
-                        <MapPin size={20} className="text-khwela-blue" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <span className="font-medium text-khwela-blue">{location.name}</span>
-                          <Badge variant="outline" className="border-khwela-blue text-khwela-blue">
-                            {location.type}
-                          </Badge>
-                        </div>
-                        <div className="text-xs text-khwela-slate mt-1">
-                          {location.address}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <Button className="w-full mt-4 bg-khwela-blue hover:bg-khwela-blue/90">
-                  <Plus size={16} className="mr-2" /> Add New Location
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Promotions */}
+            
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-xl font-bold text-khwela-blue">Current Promotions</CardTitle>
+              <CardHeader className="pb-2">
+                <CardTitle>Favorite Drivers</CardTitle>
+                <CardDescription>Drivers you've ridden with the most</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {promotions.map((promo) => (
-                    <div key={promo.id} className="border border-gray-100 rounded-lg p-4 hover:bg-gray-50">
-                      <div className="flex justify-between">
-                        <h4 className="font-medium text-khwela-blue">{promo.title}</h4>
-                        {promo.code && (
-                          <Badge className="bg-khwela-gold/20 text-amber-700 hover:bg-khwela-gold/20">
-                            {promo.code}
-                          </Badge>
-                        )}
-                      </div>
-                      <p className="text-sm text-khwela-slate mt-1">{promo.description}</p>
-                      <div className="text-xs text-khwela-slate mt-2">
-                        Valid until: {new Date(promo.expiry).toLocaleDateString('en-ZA')}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <Avatar>
+                        <AvatarFallback>SM</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-medium text-khwela-blue">Sipho M.</p>
+                        <div className="flex items-center">
+                          <Star size={12} className="text-yellow-500 fill-yellow-500 mr-1" />
+                          <span className="text-sm text-khwela-slate">4.9 • 8 rides</span>
+                        </div>
                       </div>
                     </div>
-                  ))}
+                    <Button variant="outline" size="sm">Book Again</Button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <Avatar>
+                        <AvatarFallback>JN</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-medium text-khwela-blue">Jane N.</p>
+                        <div className="flex items-center">
+                          <Star size={12} className="text-yellow-500 fill-yellow-500 mr-1" />
+                          <span className="text-sm text-khwela-slate">4.8 • 5 rides</span>
+                        </div>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">Book Again</Button>
+                  </div>
                 </div>
-                <Button variant="outline" className="w-full mt-4 border-khwela-blue text-khwela-blue hover:bg-khwela-light">
-                  View All Promotions
-                </Button>
               </CardContent>
             </Card>
-          </div>
-        </div>
+          </TabsContent>
+        )}
 
-        {/* Quick Links */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light h-auto py-3">
-            <Receipt size={18} className="mr-2" />
-            Payment Methods
-          </Button>
-          <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light h-auto py-3">
-            <User size={18} className="mr-2" />
-            Profile Settings
-          </Button>
-          <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light h-auto py-3">
-            <Gift size={18} className="mr-2" />
-            Refer & Earn
-          </Button>
-          <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light h-auto py-3">
-            <HelpCircle size={18} className="mr-2" />
-            Get Help
-          </Button>
-        </div>
-      </div>
+        {activeTab === "rides" && (
+          <TabsContent value="rides" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Ride History</CardTitle>
+                <CardDescription>Your past rides</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {rideHistory.length > 0 ? (
+                  <div className="space-y-4">
+                    {rideHistory.map((ride) => (
+                      <div key={ride.id} className="border rounded-lg p-4">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between">
+                          <div>
+                            <div className="flex items-center space-x-2 mb-2">
+                              <Calendar size={16} className="text-khwela-blue" />
+                              <span className="text-sm text-khwela-slate">{ride.date} at {ride.time}</span>
+                            </div>
+                            <div className="flex items-start space-x-2 mb-1">
+                              <MapPin size={16} className="text-green-500 mt-1" />
+                              <div>
+                                <span className="text-xs text-gray-500">From</span>
+                                <p className="text-khwela-blue font-medium">{ride.from}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start space-x-2">
+                              <MapPin size={16} className="text-red-500 mt-1" />
+                              <div>
+                                <span className="text-xs text-gray-500">To</span>
+                                <p className="text-khwela-blue font-medium">{ride.to}</p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="mt-4 md:mt-0 flex flex-col items-end">
+                            <Badge variant="outline" className="mb-2 bg-green-50 text-green-700">
+                              <CheckCircle size={12} className="mr-1" /> Completed
+                            </Badge>
+                            <div className="text-lg font-bold text-khwela-blue">{ride.price}</div>
+                            <div className="flex items-center mt-2">
+                              <div className="flex items-center mr-2">
+                                <Star size={12} className="text-yellow-500 fill-yellow-500" />
+                                <span className="text-sm ml-1">{ride.driverRating}</span>
+                              </div>
+                              <span className="text-sm text-khwela-slate">{ride.driverName}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex justify-end mt-4 space-x-2">
+                          <Button variant="outline" size="sm">Report Issue</Button>
+                          <Button size="sm" className="bg-khwela-blue">View Receipt</Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-10">
+                    <Clock className="mx-auto h-10 w-10 text-gray-400 mb-3" />
+                    <h3 className="text-lg font-medium text-khwela-blue mb-1">No Ride History</h3>
+                    <p className="text-khwela-slate mb-4">You haven't taken any rides yet.</p>
+                    <Button onClick={() => window.location.href = "/ride"}>Book Your First Ride</Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        )}
+
+        {activeTab === "payment" && (
+          <TabsContent value="payment" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Payment Methods</CardTitle>
+                <CardDescription>Manage your payment options</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                    <div className="flex items-center space-x-3">
+                      <div className="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <CreditCard className="text-blue-600 h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-khwela-blue">Visa Card</p>
+                        <p className="text-sm text-khwela-slate">**** **** **** 4587</p>
+                      </div>
+                    </div>
+                    <Badge>Default</Badge>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="h-10 w-10 bg-green-100 rounded-full flex items-center justify-center">
+                        <CreditCard className="text-green-600 h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-khwela-blue">Mastercard</p>
+                        <p className="text-sm text-khwela-slate">**** **** **** 1234</p>
+                      </div>
+                    </div>
+                    <Button variant="ghost" size="sm">Set Default</Button>
+                  </div>
+                  
+                  <Button className="w-full" variant="outline">
+                    <CreditCard className="mr-2 h-4 w-4" /> Add Payment Method
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        )}
+
+        {activeTab === "profile" && (
+          <TabsContent value="profile" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Personal Information</CardTitle>
+                <CardDescription>Manage your profile details</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="md:w-1/3 flex flex-col items-center">
+                    <Avatar className="h-24 w-24 mb-4">
+                      <AvatarFallback className="text-2xl">LD</AvatarFallback>
+                    </Avatar>
+                    <Button variant="outline" size="sm">Change Photo</Button>
+                    
+                    <div className="mt-6 bg-khwela-light p-4 rounded-md w-full">
+                      <h3 className="font-semibold text-khwela-blue mb-2 flex items-center">
+                        <Shield className="h-4 w-4 mr-2" /> Account Verification
+                      </h3>
+                      <Progress value={100} className="h-2 mb-2" />
+                      <p className="text-sm text-khwela-slate">
+                        Your account is fully verified!
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="md:w-2/3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="full-name">Full Name</Label>
+                        <Input id="full-name" value="Lebo Dlamini" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="email">Email</Label>
+                        <Input id="email" type="email" value="lebo.dlamini@email.com" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="phone">Phone Number</Label>
+                        <Input id="phone" value="+27 72 123 4567" className="mt-1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="emergency-contact">Emergency Contact</Label>
+                        <Input id="emergency-contact" value="+27 83 987 6543" className="mt-1" />
+                      </div>
+                    </div>
+                    
+                    <div className="mt-6">
+                      <Label htmlFor="home-address">Home Address</Label>
+                      <Input id="home-address" value="123 Main Road, Green Point, Cape Town" className="mt-1" />
+                    </div>
+                    
+                    <div className="mt-6 flex justify-end">
+                      <Button className="bg-khwela-blue">Save Changes</Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Security & Privacy</CardTitle>
+                <CardDescription>Manage your account security</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div>
+                    <Label htmlFor="current-password">Current Password</Label>
+                    <Input id="current-password" type="password" value="********" className="mt-1" />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="new-password">New Password</Label>
+                      <Input id="new-password" type="password" className="mt-1" />
+                    </div>
+                    <div>
+                      <Label htmlFor="confirm-password">Confirm Password</Label>
+                      <Input id="confirm-password" type="password" className="mt-1" />
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-end">
+                    <Button variant="outline" className="mr-2">Reset</Button>
+                    <Button className="bg-khwela-blue">Update Password</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        )}
+
+        {activeTab === "refer" && (
+          <TabsContent value="refer" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center space-x-2">
+                  <Users className="h-5 w-5 text-khwela-blue" />
+                  <CardTitle>Refer Friends & Earn Rewards</CardTitle>
+                </div>
+                <CardDescription>Share Khwela with your friends and earn ride credits</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-khwela-light/50 rounded-lg p-6 text-center mb-6">
+                  <h3 className="text-xl font-bold text-khwela-blue mb-2">Earn R50 Free Ride Credit</h3>
+                  <p className="text-khwela-slate mb-4">For every friend who signs up and takes their first ride</p>
+                  
+                  <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 max-w-xl mx-auto">
+                    <div className="flex-grow flex items-center border border-gray-300 rounded-lg overflow-hidden bg-white">
+                      <div className="px-4 py-3 truncate flex-grow">
+                        <span className="text-khwela-slate">{referralLink}</span>
+                      </div>
+                    </div>
+                    <Button 
+                      className={`${copied ? 'bg-green-600' : 'bg-khwela-blue'} text-white hover:bg-opacity-90`}
+                      onClick={handleCopyLink}
+                    >
+                      {copied ? (
+                        <><CheckCircle size={16} className="mr-2" /> Copied!</>
+                      ) : (
+                        <><Copy size={16} className="mr-2" /> Copy Link</>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                  <div className="bg-white p-5 rounded-lg border shadow-sm">
+                    <div className="mb-3 flex justify-center">
+                      <div className="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
+                        <Share2 className="h-6 w-6 text-blue-600" />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold text-center text-khwela-blue mb-2">Share</h3>
+                    <p className="text-sm text-center text-khwela-slate">
+                      Share your referral link with friends and family
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white p-5 rounded-lg border shadow-sm">
+                    <div className="mb-3 flex justify-center">
+                      <div className="h-12 w-12 bg-green-100 rounded-full flex items-center justify-center">
+                        <User className="h-6 w-6 text-green-600" />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold text-center text-khwela-blue mb-2">Sign Up</h3>
+                    <p className="text-sm text-center text-khwela-slate">
+                      They sign up using your referral link
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white p-5 rounded-lg border shadow-sm">
+                    <div className="mb-3 flex justify-center">
+                      <div className="h-12 w-12 bg-purple-100 rounded-full flex items-center justify-center">
+                        <CreditCard className="h-6 w-6 text-purple-600" />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold text-center text-khwela-blue mb-2">Earn</h3>
+                    <p className="text-sm text-center text-khwela-slate">
+                      You both get R50 after their first ride
+                    </p>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-semibold text-khwela-blue mb-4">Share via:</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light">
+                      <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" className="w-4 h-4 mr-2" />
+                      WhatsApp
+                    </Button>
+                    <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light">
+                      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" className="w-4 h-4 mr-2" />
+                      Facebook
+                    </Button>
+                    <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light">
+                      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" className="w-4 h-4 mr-2" />
+                      Instagram
+                    </Button>
+                    <Button variant="outline" className="border-khwela-blue text-khwela-blue hover:bg-khwela-light">
+                      <Share2 size={16} className="mr-2" />
+                      Email
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <div className="flex items-center space-x-2">
+                  <Users className="h-5 w-5 text-khwela-blue" />
+                  <CardTitle>Referral Stats</CardTitle>
+                </div>
+                <CardDescription>Track your referrals and earnings</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                  <Card className="bg-blue-50 border-blue-200">
+                    <CardContent className="p-6">
+                      <h3 className="text-sm font-medium text-blue-700 mb-1">Total Referrals</h3>
+                      <div className="text-3xl font-bold text-blue-600">3</div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="bg-green-50 border-green-200">
+                    <CardContent className="p-6">
+                      <h3 className="text-sm font-medium text-green-700 mb-1">Successful Referrals</h3>
+                      <div className="text-3xl font-bold text-green-600">2</div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="bg-yellow-50 border-yellow-200">
+                    <CardContent className="p-6">
+                      <h3 className="text-sm font-medium text-yellow-700 mb-1">Total Earned</h3>
+                      <div className="text-3xl font-bold text-yellow-600">R100</div>
+                    </CardContent>
+                  </Card>
+                </div>
+                
+                <div className="bg-white rounded-xl shadow-sm overflow-hidden border">
+                  <div className="p-4 bg-gray-50 border-b">
+                    <h3 className="font-semibold text-khwela-blue">Recent Referrals</h3>
+                  </div>
+                  <div className="divide-y divide-gray-100">
+                    <div className="p-4">
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center">
+                          <Avatar className="h-10 w-10 mr-3">
+                            <AvatarFallback>TM</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-medium text-khwela-blue">Thabo Mthembu</p>
+                            <p className="text-sm text-khwela-slate">Joined Apr 5, 2025</p>
+                          </div>
+                        </div>
+                        <Badge className="bg-green-100 text-green-700 hover:bg-green-100">R50 earned</Badge>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center">
+                          <Avatar className="h-10 w-10 mr-3">
+                            <AvatarFallback>NN</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-medium text-khwela-blue">Nomsa Ndlovu</p>
+                            <p className="text-sm text-khwela-slate">Joined Mar 22, 2025</p>
+                          </div>
+                        </div>
+                        <Badge className="bg-green-100 text-green-700 hover:bg-green-100">R50 earned</Badge>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center">
+                          <Avatar className="h-10 w-10 mr-3">
+                            <AvatarFallback>LM</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-medium text-khwela-blue">Lwazi Mbatha</p>
+                            <p className="text-sm text-khwela-slate">Joined Mar 10, 2025</p>
+                          </div>
+                        </div>
+                        <Badge className="bg-yellow-100 text-yellow-700 hover:bg-yellow-100">Pending</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        )}
+      </Tabs>
     </div>
   );
 };

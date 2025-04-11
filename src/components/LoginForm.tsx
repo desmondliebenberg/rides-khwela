@@ -1,18 +1,36 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link } from "react-router-dom";
-import { Car, LogIn, Smartphone } from "lucide-react";
+import { Car, LogIn, Smartphone, User } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const LoginForm = () => {
+  const [searchParams] = useSearchParams();
+  const userTypeParam = searchParams.get('user');
+  
+  const [userType, setUserType] = useState<"rider" | "driver">(
+    userTypeParam === "rider" ? "rider" : "driver"
+  );
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [isOtpMode, setIsOtpMode] = useState(false);
   const [otp, setOtp] = useState(["", "", "", ""]);
+
+  useEffect(() => {
+    if (userTypeParam === "rider") {
+      setUserType("rider");
+    }
+  }, [userTypeParam]);
+
+  const handleUserTypeChange = (value: string) => {
+    setUserType(value as "rider" | "driver");
+  };
 
   const handleOtpChange = (index: number, value: string) => {
     if (value.length > 1) {
@@ -55,7 +73,14 @@ const LoginForm = () => {
 
   const verifyOtp = () => {
     // Simulate OTP verification
-    window.location.href = "/dashboard";
+    const destination = userType === "rider" ? "/rider-dashboard" : "/driver-dashboard";
+    window.location.href = destination;
+  };
+
+  const handleLogin = () => {
+    // For simplicity, redirect based on user type without actual authentication
+    const destination = userType === "rider" ? "/rider-dashboard" : "/driver-dashboard";
+    window.location.href = destination;
   };
 
   return (
@@ -67,17 +92,36 @@ const LoginForm = () => {
           </div>
         </div>
         <h2 className="mt-6 text-center text-3xl font-bold text-khwela-blue">
-          Driver Login
+          Log in to Khwela
         </h2>
         <p className="mt-2 text-center text-khwela-slate">
-          {isOtpMode 
-            ? "We've sent a verification code to your phone" 
-            : "Enter your credentials to access your account"}
+          Safe and affordable rides across South Africa
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          {/* User Type Selection */}
+          <div className="mb-6">
+            <Tabs 
+              defaultValue={userType} 
+              value={userType} 
+              onValueChange={handleUserTypeChange}
+              className="w-full"
+            >
+              <TabsList className="grid grid-cols-2 w-full">
+                <TabsTrigger value="rider" className="flex items-center justify-center">
+                  <User size={16} className="mr-2" />
+                  Rider
+                </TabsTrigger>
+                <TabsTrigger value="driver" className="flex items-center justify-center">
+                  <Car size={16} className="mr-2" />
+                  Driver
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+
           {!isOtpMode ? (
             <form className="space-y-6">
               <div>
@@ -133,7 +177,7 @@ const LoginForm = () => {
                 <Button
                   type="button"
                   className="w-full bg-khwela-blue hover:bg-khwela-blue/90"
-                  onClick={requestOtp}
+                  onClick={handleLogin}
                 >
                   <LogIn size={16} className="mr-2" />
                   Sign In with Password
@@ -234,8 +278,8 @@ const LoginForm = () => {
                 className="w-full border-khwela-gold text-khwela-blue bg-khwela-gold/10 hover:bg-khwela-gold/20"
                 asChild
               >
-                <Link to="/signup">
-                  Sign Up to Drive
+                <Link to={userType === "rider" ? "/rider-signup" : "/signup"}>
+                  Sign Up as {userType === "rider" ? "Rider" : "Driver"}
                 </Link>
               </Button>
             </div>

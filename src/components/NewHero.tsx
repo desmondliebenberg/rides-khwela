@@ -76,7 +76,7 @@ const NewHero = () => {
               </Button>
               <Button 
                 size="lg" 
-                className="bg-white text-khwela-blue hover:bg-gray-100 border-2 border-white"
+                className="bg-white text-khwela-blue hover:bg-gray-100 border-2 border-white font-medium"
               >
                 <Link to="/driver">Learn More</Link>
               </Button>
