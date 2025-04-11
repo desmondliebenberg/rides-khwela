@@ -10,18 +10,21 @@ const useAuth = () => {
   // Check localStorage for a simulated auth token
   const isLoggedIn = localStorage.getItem("khwela-auth") === "true";
   const userType = localStorage.getItem("khwela-user-type") || "";
+  const userName = localStorage.getItem("khwela-user-name") || "User";
   
-  const login = (type: string) => {
+  const login = (type: string, name: string = "User") => {
     localStorage.setItem("khwela-auth", "true");
     localStorage.setItem("khwela-user-type", type);
+    localStorage.setItem("khwela-user-name", name);
   };
   
   const logout = () => {
     localStorage.removeItem("khwela-auth");
     localStorage.removeItem("khwela-user-type");
+    localStorage.removeItem("khwela-user-name");
   };
   
-  return { isLoggedIn, userType, login, logout };
+  return { isLoggedIn, userType, userName, login, logout };
 };
 
 const Navbar = () => {
@@ -30,7 +33,7 @@ const Navbar = () => {
   const [language, setLanguage] = useState("English");
   const location = useLocation();
   const navigate = useNavigate();
-  const { isLoggedIn, userType } = useAuth();
+  const { isLoggedIn, userType, userName } = useAuth();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -140,7 +143,7 @@ const Navbar = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button className="bg-khwela-blue text-white hover:bg-khwela-blue/90">
-                      My Account
+                      Welcome, {userName}
                       <ChevronDown className="ml-1 h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -250,6 +253,7 @@ const Navbar = () => {
           <div className="flex flex-col space-y-2 mt-4">
             {isLoggedIn ? (
               <>
+                <p className="text-khwela-blue font-medium px-2">Welcome, {userName}</p>
                 <Link to={userType === "rider" ? "/rider-dashboard" : "/driver-dashboard"}>
                   <Button className="w-full bg-khwela-blue text-white hover:bg-khwela-blue/90">
                     My Dashboard

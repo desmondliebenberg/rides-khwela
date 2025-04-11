@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,8 +9,30 @@ import { Link } from "react-router-dom";
 import { Car, LogIn, Smartphone, User } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+// Simulated auth - in a real app, this would be replaced with proper auth state management
+const useAuth = () => {
+  // Check localStorage for a simulated auth token
+  const isLoggedIn = localStorage.getItem("khwela-auth") === "true";
+  const userType = localStorage.getItem("khwela-user-type") || "";
+  
+  const login = (type: string, name: string = "User") => {
+    localStorage.setItem("khwela-auth", "true");
+    localStorage.setItem("khwela-user-type", type);
+    localStorage.setItem("khwela-user-name", name);
+  };
+  
+  const logout = () => {
+    localStorage.removeItem("khwela-auth");
+    localStorage.removeItem("khwela-user-type");
+    localStorage.removeItem("khwela-user-name");
+  };
+  
+  return { isLoggedIn, userType, login, logout };
+};
+
 const LoginForm = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const userTypeParam = searchParams.get('user');
   
   const [userType, setUserType] = useState<"rider" | "driver">(
@@ -18,6 +40,7 @@ const LoginForm = () => {
   );
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState(""); // Add name field
   const [rememberMe, setRememberMe] = useState(false);
   const [isOtpMode, setIsOtpMode] = useState(false);
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -73,14 +96,23 @@ const LoginForm = () => {
 
   const verifyOtp = () => {
     // Simulate OTP verification
+    const { login } = useAuth();
+    const defaultName = userType === "rider" ? "Rider" : "Driver";
+    login(userType, userName || defaultName);
+
     const destination = userType === "rider" ? "/rider-dashboard" : "/driver-dashboard";
-    window.location.href = destination;
+    navigate(destination);
   };
 
   const handleLogin = () => {
-    // For simplicity, redirect based on user type without actual authentication
+    const { login } = useAuth();
+    // Use name if provided, otherwise default to userType
+    const defaultName = userType === "rider" ? "Rider" : "Driver";
+    login(userType, userName || defaultName);
+
+    // Redirect based on user type
     const destination = userType === "rider" ? "/rider-dashboard" : "/driver-dashboard";
-    window.location.href = destination;
+    navigate(destination);
   };
 
   return (
@@ -124,6 +156,20 @@ const LoginForm = () => {
 
           {!isOtpMode ? (
             <form className="space-y-6">
+              <div>
+                <Label htmlFor="name">Your Name</Label>
+                <div className="mt-1">
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                  />
+                </div>
+              </div>
+              
               <div>
                 <Label htmlFor="phone">Phone Number</Label>
                 <div className="mt-1">

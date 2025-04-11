@@ -11,6 +11,7 @@ import {
   UserCheck, 
   ArrowRight
 } from "lucide-react";
+import QRVerification from "@/components/QRVerification";
 
 const CashRides = () => {
   return (
@@ -151,11 +152,11 @@ const CashRides = () => {
           </div>
         </div>
 
-        {/* QR + PIN Verification */}
-        <div className="max-w-6xl mx-auto bg-gradient-to-r from-khwela-blue to-khwela-dark rounded-xl p-8 shadow-lg text-white">
+        {/* QR Verification Section */}
+        <div className="max-w-6xl mx-auto bg-gradient-to-r from-khwela-blue to-khwela-dark rounded-xl p-8 shadow-lg text-white mb-20">
           <div className="flex items-center justify-center space-x-3 mb-8">
             <QrCode size={24} className="text-khwela-gold" />
-            <h2 className="text-2xl font-bold">QR + PIN Verification</h2>
+            <h2 className="text-2xl font-bold">QR Verification</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -163,21 +164,17 @@ const CashRides = () => {
               <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
                   <QrCode size={20} className="mr-2 text-khwela-gold" />
-                  QR Code Before Trip
+                  QR Code Verification
                 </h3>
                 <p className="text-white/90 mb-4">
                   When you arrive to pick up a cash ride passenger:
                 </p>
                 <ol className="list-decimal pl-5 space-y-2 text-white/90">
-                  <li>Ask rider to scan your driver QR code in their app</li>
-                  <li>This confirms it's the right rider and the right pickup</li>
-                  <li>Trip only starts when QR is successfully scanned</li>
-                  <li>Ensures both parties are verified</li>
+                  <li>Rider enters the car and pays the cash fare</li>
+                  <li>Driver scans the Rider's QR code to confirm payment</li>
+                  <li>Rider scans the Driver's QR code to confirm the trip</li>
+                  <li>Trip only starts when both QR scans are completed</li>
                 </ol>
-              </div>
-
-              <div className="flex justify-center mt-6">
-                <ArrowRight size={32} className="text-khwela-gold" />
               </div>
             </div>
 
@@ -185,16 +182,16 @@ const CashRides = () => {
               <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
                   <ShieldCheck size={20} className="mr-2 text-khwela-gold" />
-                  PIN After Trip
+                  Security Measures
                 </h3>
                 <p className="text-white/90 mb-4">
-                  When you complete a cash trip:
+                  Our QR verification system ensures:
                 </p>
                 <ol className="list-decimal pl-5 space-y-2 text-white/90">
-                  <li>Rider must enter their 4-digit PIN in your app</li>
-                  <li>This confirms trip completion and payment received</li>
+                  <li>Both parties are verified before the trip begins</li>
                   <li>Creates a digital record of cash payment</li>
                   <li>Provides evidence in case of disputes</li>
+                  <li>Blocks non-compliant riders from using cash in the future</li>
                 </ol>
               </div>
 
@@ -206,6 +203,9 @@ const CashRides = () => {
             </div>
           </div>
         </div>
+
+        {/* QR Verification Component */}
+        <QRVerification />
 
         {/* Get Started */}
         <div className="max-w-4xl mx-auto text-center mt-20">
