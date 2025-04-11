@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -182,16 +181,13 @@ const CashRides = () => {
               <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
                   <ShieldCheck size={20} className="mr-2 text-khwela-gold" />
-                  Security Measures
+                  QR Verification Process for Cash Trips
                 </h3>
-                <p className="text-white/90 mb-4">
-                  Our QR verification system ensures:
-                </p>
                 <ol className="list-decimal pl-5 space-y-2 text-white/90">
-                  <li>Both parties are verified before the trip begins</li>
-                  <li>Creates a digital record of cash payment</li>
-                  <li>Provides evidence in case of disputes</li>
-                  <li>Blocks non-compliant riders from using cash in the future</li>
+                  <li>Rider enters the car and pays the cash fare.</li>
+                  <li>Driver scans the Rider's QR code to confirm cash payment.</li>
+                  <li>Rider scans the Driver's QR code to confirm the trip.</li>
+                  <li>Trip starts only after both QR scans are completed.</li>
                 </ol>
               </div>
 
