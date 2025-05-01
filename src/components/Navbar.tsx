@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Globe, ChevronDown, User, MapPin } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import UserProfileDropdown from "./UserProfileDropdown";
 
 // Simulated auth - in a real app, this would be replaced with proper auth state management
 const useAuth = () => {
@@ -113,7 +114,8 @@ const Navbar = () => {
               </DropdownMenu>
               
               <Link to="/support" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Support</Link>
-              <Link to="/refer" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>Refer & Earn</Link>
+              
+              {/* Removed "Refer & Earn" from main navigation as requested */}
             </div>
             
             {/* Language Selector */}
@@ -140,34 +142,10 @@ const Navbar = () => {
               </Button>
 
               {isLoggedIn ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button className="bg-khwela-blue text-white hover:bg-khwela-blue/90">
-                      Welcome, {userName}
-                      <ChevronDown className="ml-1 h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
-                    <DropdownMenuItem asChild>
-                      <Link to={userType === "rider" ? "/rider-dashboard" : "/driver-dashboard"} className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
-                        Dashboard
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link to="/refer" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
-                        Refer & Earn
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => {
-                      // Implement logout
-                      const auth = useAuth();
-                      auth.logout();
-                      window.location.href = "/";
-                    }} className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
-                      Logout
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <UserProfileDropdown 
+                  userName={userName} 
+                  userType={userType as "rider" | "driver"} 
+                />
               ) : (
                 <>
                   <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
@@ -238,7 +216,11 @@ const Navbar = () => {
           </div>
           
           <Link to="/support" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Support</Link>
-          <Link to="/refer" className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Refer & Earn</Link>
+          
+          {/* Only show Refer & Earn in the dropdown, removed from main menu */}
+          {isLoggedIn && (
+            <Link to={`/${userType}-dashboard/refer`} className="text-khwela-slate py-2 px-4 hover:bg-gray-100 rounded">Refer & Earn</Link>
+          )}
           
           {/* Mobile Language Selector */}
           <div className="py-2 px-4 border-t border-gray-100">
