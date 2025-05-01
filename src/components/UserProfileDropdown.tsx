@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronDown, HelpCircle, Wallet, History, Settings, LogOut } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 interface UserProfileDropdownProps {
   userName: string;
@@ -39,6 +40,12 @@ const UserProfileDropdown = ({
     localStorage.removeItem("khwela-auth");
     localStorage.removeItem("khwela-user-type");
     localStorage.removeItem("khwela-user-name");
+    
+    // Notify user of successful logout
+    toast({
+      title: "Logged out",
+      description: "You have been successfully logged out.",
+    });
     
     // Close dropdown and redirect to home
     setOpen(false);

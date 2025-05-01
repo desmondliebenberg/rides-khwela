@@ -28,6 +28,13 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import CookiePolicyPage from "./pages/CookiePolicyPage";
 import PopiaCompliancePage from "./pages/PopiaCompliancePage";
 
+// Dashboard sections
+import WalletPage from "./pages/dashboard/WalletPage";
+import HistoryPage from "./pages/dashboard/HistoryPage";
+import ReferEarnPage from "./pages/dashboard/ReferEarnPage";
+import AccountPage from "./pages/dashboard/AccountPage";
+import SettingsPage from "./pages/dashboard/SettingsPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -51,8 +58,23 @@ const App = () => (
           <Route path="/support" element={<SupportPage />} />
           <Route path="/refer" element={<ReferPage />} />
           <Route path="/login" element={<LoginPage />} />
+          
+          {/* Dashboard Routes */}
           <Route path="/driver-dashboard" element={<DriverDashboardPage />} />
           <Route path="/rider-dashboard" element={<RiderDashboardPage />} />
+          
+          {/* Dashboard Section Routes */}
+          <Route path="/driver-dashboard/wallet" element={<WalletPage userType="driver" />} />
+          <Route path="/rider-dashboard/wallet" element={<WalletPage userType="rider" />} />
+          <Route path="/driver-dashboard/history" element={<HistoryPage userType="driver" />} />
+          <Route path="/rider-dashboard/history" element={<HistoryPage userType="rider" />} />
+          <Route path="/driver-dashboard/refer" element={<ReferEarnPage userType="driver" />} />
+          <Route path="/rider-dashboard/refer" element={<ReferEarnPage userType="rider" />} />
+          <Route path="/driver-dashboard/account" element={<AccountPage userType="driver" />} />
+          <Route path="/rider-dashboard/account" element={<AccountPage userType="rider" />} />
+          <Route path="/driver-dashboard/settings" element={<SettingsPage userType="driver" />} />
+          <Route path="/rider-dashboard/settings" element={<SettingsPage userType="rider" />} />
+          
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/cookie-policy" element={<CookiePolicyPage />} />
