@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -40,10 +39,12 @@ const LoginForm = () => {
   );
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState(""); // Add name field
+  const [userName, setUserName] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [isOtpMode, setIsOtpMode] = useState(false);
   const [otp, setOtp] = useState(["", "", "", ""]);
+  const [showBiometricPrompt, setShowBiometricPrompt] = useState(false);
+  const [isTwoFactorEnabled, setIsTwoFactorEnabled] = useState(true);
 
   useEffect(() => {
     if (userTypeParam === "rider") {
@@ -92,6 +93,15 @@ const LoginForm = () => {
   const requestOtp = () => {
     // Simulate OTP request
     setIsOtpMode(true);
+  };
+
+  const simulateBiometricAuth = () => {
+    setShowBiometricPrompt(true);
+    // In a real app, this would trigger native biometric authentication
+    setTimeout(() => {
+      setShowBiometricPrompt(false);
+      handleLogin();
+    }, 2000);
   };
 
   const verifyOtp = () => {
@@ -153,6 +163,29 @@ const LoginForm = () => {
               </TabsList>
             </Tabs>
           </div>
+
+          {/* Biometric Authentication Prompt */}
+          {showBiometricPrompt && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+              <div className="bg-white p-6 rounded-lg w-80 text-center">
+                <div className="mb-4 flex justify-center">
+                  <User size={48} className="text-khwela-blue" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Facial Verification</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Please look directly at your camera to verify your identity.
+                </p>
+                <div className="animate-pulse h-2 bg-khwela-blue rounded-full mb-4"></div>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowBiometricPrompt(false)}
+                  className="mt-2"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          )}
 
           {!isOtpMode ? (
             <form className="space-y-6">
@@ -228,6 +261,17 @@ const LoginForm = () => {
                   <LogIn size={16} className="mr-2" />
                   Sign In with Password
                 </Button>
+                
+                {userType === "driver" && (
+                  <Button
+                    type="button"
+                    className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90"
+                    onClick={simulateBiometricAuth}
+                  >
+                    <User size={16} className="mr-2" />
+                    Biometric Verification
+                  </Button>
+                )}
                 
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
