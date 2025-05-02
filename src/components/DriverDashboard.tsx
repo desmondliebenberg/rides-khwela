@@ -10,15 +10,18 @@ import {
   User, 
   FileText,
   CheckCircle,
-  AlertCircle,
+  AlertTriangle,
   QrCode,
   Award,
   BookOpen,
   ShieldCheck,
   ArrowRight
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const DriverDashboard = () => {
+  const navigate = useNavigate();
+  
   // Simulated data - in a real app this would come from an API
   const earnings = {
     today: "R650.00",
@@ -87,8 +90,12 @@ const DriverDashboard = () => {
                 </div>
               </div>
             </div>
-            <Button variant="outline" className="border-khwela-blue text-khwela-blue">
-              View Details
+            <Button 
+              variant="outline" 
+              className="border-khwela-blue text-khwela-blue"
+              onClick={() => navigate("/driver-dashboard/compliance")}
+            >
+              View Compliance
             </Button>
           </CardContent>
         </Card>
@@ -126,7 +133,11 @@ const DriverDashboard = () => {
                 <p className="text-khwela-slate">This Month</p>
                 <p className="font-semibold text-khwela-blue">{earnings.month}</p>
               </div>
-              <Button variant="link" className="w-full text-khwela-blue">
+              <Button 
+                variant="link" 
+                className="w-full text-khwela-blue"
+                onClick={() => navigate("/driver-dashboard/wallet")}
+              >
                 View Earnings History
               </Button>
             </div>
@@ -150,7 +161,7 @@ const DriverDashboard = () => {
                       {doc.status === 'valid' ? (
                         <CheckCircle size={18} className="text-green-600" />
                       ) : (
-                        <AlertCircle size={18} className="text-amber-500" />
+                        <AlertTriangle size={18} className="text-amber-500" />
                       )}
                     </div>
                     <div>
@@ -166,8 +177,11 @@ const DriverDashboard = () => {
                 </div>
               ))}
               
-              <Button className="w-full bg-khwela-blue hover:bg-khwela-blue/90">
-                Upload Documents
+              <Button 
+                className="w-full bg-khwela-blue hover:bg-khwela-blue/90"
+                onClick={() => navigate("/driver-dashboard/compliance")}
+              >
+                Manage Documents
               </Button>
             </div>
           </CardContent>

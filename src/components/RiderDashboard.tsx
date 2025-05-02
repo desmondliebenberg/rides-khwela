@@ -1,4 +1,5 @@
 
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,6 +16,8 @@ import {
 } from "lucide-react";
 
 const RiderDashboard = () => {
+  const navigate = useNavigate();
+  
   // Simulated data - in a real app this would come from an API
   const recentTrips = [
     { id: 1, from: "Sandton City", to: "OR Tambo Airport", date: "2023-04-28", amount: "R120.00", status: "Completed" },
@@ -43,7 +46,10 @@ const RiderDashboard = () => {
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-4">
-              <Button className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90 font-medium">
+              <Button 
+                className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90 font-medium"
+                onClick={() => navigate("/ride")}
+              >
                 Request New Ride
               </Button>
               
@@ -90,14 +96,16 @@ const RiderDashboard = () => {
             </div>
             
             <h3 className="font-medium text-khwela-blue mb-3">Top Up Options</h3>
-            <div className="grid grid-cols-2 gap-2 mb-4">
-              <Button variant="outline" size="sm">R50</Button>
+            <div className="grid grid-cols-3 gap-2 mb-4">
               <Button variant="outline" size="sm">R100</Button>
-              <Button variant="outline" size="sm">R200</Button>
+              <Button variant="outline" size="sm">R250</Button>
               <Button variant="outline" size="sm">R500</Button>
             </div>
             
-            <Button className="w-full bg-khwela-blue hover:bg-khwela-blue/90">
+            <Button 
+              className="w-full bg-khwela-blue hover:bg-khwela-blue/90"
+              onClick={() => navigate("/rider-dashboard/wallet")}
+            >
               Top Up Now
             </Button>
 
@@ -142,7 +150,11 @@ const RiderDashboard = () => {
               ))}
               
               <div className="text-center pt-2">
-                <Button variant="link" className="text-khwela-blue">
+                <Button 
+                  variant="link" 
+                  className="text-khwela-blue"
+                  onClick={() => navigate("/rider-dashboard/history")}
+                >
                   View All Trips <ArrowRight size={14} className="ml-1" />
                 </Button>
               </div>

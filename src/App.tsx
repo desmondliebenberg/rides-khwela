@@ -34,6 +34,7 @@ import HistoryPage from "./pages/dashboard/HistoryPage";
 import ReferEarnPage from "./pages/dashboard/ReferEarnPage";
 import AccountPage from "./pages/dashboard/AccountPage";
 import SettingsPage from "./pages/dashboard/SettingsPage";
+import CompliancePage from "./pages/dashboard/CompliancePage";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +75,7 @@ const App = () => (
           <Route path="/rider-dashboard/account" element={<AccountPage userType="rider" />} />
           <Route path="/driver-dashboard/settings" element={<SettingsPage userType="driver" />} />
           <Route path="/rider-dashboard/settings" element={<SettingsPage userType="rider" />} />
+          <Route path="/driver-dashboard/compliance" element={<CompliancePage />} />
           
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
