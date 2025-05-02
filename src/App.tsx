@@ -29,6 +29,11 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import CookiePolicyPage from "./pages/CookiePolicyPage";
 import PopiaCompliancePage from "./pages/PopiaCompliancePage";
 
+// New Info Pages
+import DriverInfoPage from "./pages/DriverInfoPage";
+import RiderInfoPage from "./pages/RiderInfoPage";
+import FAQPage from "./pages/FAQPage";
+
 // Dashboard sections
 import WalletPage from "./pages/dashboard/WalletPage";
 import HistoryPage from "./pages/dashboard/HistoryPage";
@@ -60,6 +65,11 @@ const App = () => (
           <Route path="/support" element={<SupportPage />} />
           <Route path="/refer" element={<ReferPage />} />
           <Route path="/login" element={<LoginPage />} />
+          
+          {/* New Info Pages */}
+          <Route path="/driver-info" element={<DriverInfoPage />} />
+          <Route path="/rider-info" element={<RiderInfoPage />} />
+          <Route path="/faq" element={<FAQPage />} />
           
           {/* Dashboard Routes */}
           <Route path="/driver-dashboard" element={<DriverDashboardPage />} />

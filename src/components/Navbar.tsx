@@ -1,10 +1,10 @@
 
-import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavbar } from "@/hooks/useNavbar";
 import NavbarLogo from "./navbar/NavbarLogo";
 import NavbarDesktopLinks from "./navbar/NavbarDesktopLinks";
 import NavbarLanguageSelector from "./navbar/NavbarLanguageSelector";
+import NavbarThemeToggle from "./navbar/NavbarThemeToggle";
 import NavbarAuth from "./navbar/NavbarAuth";
 import NavbarMobileMenu from "./navbar/NavbarMobileMenu";
 
@@ -21,7 +21,7 @@ const Navbar = () => {
   } = useNavbar();
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled || alwaysScrolled ? "py-2 bg-white/95 backdrop-blur-md shadow-md" : "py-4 bg-transparent"}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled || alwaysScrolled ? "py-2 bg-white/95 backdrop-blur-md shadow-md dark:bg-khwela-slate/95 dark:shadow-gray-900/30" : "py-4 bg-transparent"}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -37,6 +37,12 @@ const Navbar = () => {
               userType={userType}
             />
             
+            {/* Theme Toggle */}
+            <NavbarThemeToggle
+              scrolled={scrolled}
+              alwaysScrolled={alwaysScrolled}
+            />
+            
             {/* Language Selector */}
             <NavbarLanguageSelector 
               scrolled={scrolled} 
@@ -50,7 +56,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Nav Button */}
-          <button className={`md:hidden ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'}`} onClick={() => setIsOpen(!isOpen)}>
+          <button className={`md:hidden ${scrolled || alwaysScrolled ? 'text-khwela-slate dark:text-white' : 'text-white'}`} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
