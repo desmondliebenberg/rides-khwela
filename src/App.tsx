@@ -23,6 +23,7 @@ import ReferPage from "./pages/ReferPage";
 import LoginPage from "./pages/LoginPage";
 import DriverDashboardPage from "./pages/DriverDashboardPage";
 import RiderDashboardPage from "./pages/RiderDashboardPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 import TermsPage from "./pages/TermsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import CookiePolicyPage from "./pages/CookiePolicyPage";
@@ -63,6 +64,7 @@ const App = () => (
           {/* Dashboard Routes */}
           <Route path="/driver-dashboard" element={<DriverDashboardPage />} />
           <Route path="/rider-dashboard" element={<RiderDashboardPage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
           
           {/* Dashboard Section Routes */}
           <Route path="/driver-dashboard/wallet" element={<WalletPage userType="driver" />} />

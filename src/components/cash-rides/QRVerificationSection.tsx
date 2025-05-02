@@ -2,6 +2,7 @@
 import React from "react";
 import { QrCode, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import QRTripVerification from "./QRTripVerification";
 
 const QRVerificationSection = () => {
   return (
@@ -50,6 +51,11 @@ const QRVerificationSection = () => {
             </Button>
           </div>
         </div>
+      </div>
+      
+      <div className="mt-10">
+        <h3 className="text-xl font-semibold mb-6 text-center">Try Our QR Verification Demo</h3>
+        <QRTripVerification />
       </div>
     </div>
   );
