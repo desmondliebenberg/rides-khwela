@@ -24,6 +24,7 @@ import LoginPage from "./pages/LoginPage";
 import DriverDashboardPage from "./pages/DriverDashboardPage";
 import RiderDashboardPage from "./pages/RiderDashboardPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
+import AccessDeniedPage from "./pages/AccessDeniedPage";
 import TermsPage from "./pages/TermsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import CookiePolicyPage from "./pages/CookiePolicyPage";
@@ -65,6 +66,7 @@ const App = () => (
           <Route path="/support" element={<SupportPage />} />
           <Route path="/refer" element={<ReferPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/access-denied" element={<AccessDeniedPage />} />
           
           {/* New Info Pages */}
           <Route path="/driver-info" element={<DriverInfoPage />} />

@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link } from "react-router-dom";
-import { Car, LogIn, Smartphone, User } from "lucide-react";
+import { Car, LogIn, Smartphone, User, ShieldAlert } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/components/ui/use-toast";
 
 // Simulated auth - in a real app, this would be replaced with proper auth state management
 const useAuth = () => {
@@ -32,10 +33,12 @@ const useAuth = () => {
 const LoginForm = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const userTypeParam = searchParams.get('user');
   
-  const [userType, setUserType] = useState<"rider" | "driver">(
-    userTypeParam === "rider" ? "rider" : "driver"
+  const [userType, setUserType] = useState<"rider" | "driver" | "admin">(
+    userTypeParam === "rider" ? "rider" : 
+    userTypeParam === "admin" ? "admin" : "driver"
   );
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
@@ -45,15 +48,22 @@ const LoginForm = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [showBiometricPrompt, setShowBiometricPrompt] = useState(false);
   const [isTwoFactorEnabled, setIsTwoFactorEnabled] = useState(true);
+  const [isAdminMode, setIsAdminMode] = useState(userTypeParam === "admin");
+  const [adminCode, setAdminCode] = useState("");
 
   useEffect(() => {
     if (userTypeParam === "rider") {
       setUserType("rider");
+      setIsAdminMode(false);
+    } else if (userTypeParam === "admin") {
+      setUserType("admin");
+      setIsAdminMode(true);
     }
   }, [userTypeParam]);
 
   const handleUserTypeChange = (value: string) => {
-    setUserType(value as "rider" | "driver");
+    setUserType(value as "rider" | "driver" | "admin");
+    setIsAdminMode(value === "admin");
   };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -116,7 +126,30 @@ const LoginForm = () => {
 
   const handleLogin = () => {
     const { login } = useAuth();
-    // Use name if provided, otherwise default to userType
+    
+    // Admin authentication check
+    if (userType === "admin") {
+      // In a real app, this would be a secure check against a backend
+      // For demo purposes, we're using a simple code check
+      if (adminCode === "admin123") {
+        login("admin", "Admin User");
+        toast({
+          title: "Admin Login Successful",
+          description: "Welcome to the admin dashboard.",
+        });
+        navigate("/admin-dashboard");
+        return;
+      } else {
+        toast({
+          title: "Invalid Admin Code",
+          description: "The admin code you entered is incorrect.",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+    
+    // Regular user login
     const defaultName = userType === "rider" ? "Rider" : "Driver";
     login(userType, userName || defaultName);
 
@@ -126,23 +159,23 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
           <div className="h-16 w-16 bg-khwela-light rounded-full flex items-center justify-center">
             <Car className="text-khwela-blue" size={32} />
           </div>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-bold text-khwela-blue">
+        <h2 className="mt-6 text-center text-3xl font-bold text-khwela-blue dark:text-khwela-light">
           Log in to Khwela
         </h2>
-        <p className="mt-2 text-center text-khwela-slate">
+        <p className="mt-2 text-center text-khwela-slate dark:text-gray-400">
           Safe and affordable rides across South Africa
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
           {/* User Type Selection */}
           <div className="mb-6">
             <Tabs 
@@ -151,7 +184,7 @@ const LoginForm = () => {
               onValueChange={handleUserTypeChange}
               className="w-full"
             >
-              <TabsList className="grid grid-cols-2 w-full">
+              <TabsList className="grid grid-cols-3 w-full">
                 <TabsTrigger value="rider" className="flex items-center justify-center">
                   <User size={16} className="mr-2" />
                   Rider
@@ -159,6 +192,10 @@ const LoginForm = () => {
                 <TabsTrigger value="driver" className="flex items-center justify-center">
                   <Car size={16} className="mr-2" />
                   Driver
+                </TabsTrigger>
+                <TabsTrigger value="admin" className="flex items-center justify-center">
+                  <ShieldAlert size={16} className="mr-2" />
+                  Admin
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -199,9 +236,28 @@ const LoginForm = () => {
                     placeholder="Enter your name"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
+                    className="dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   />
                 </div>
               </div>
+              
+              {isAdminMode && (
+                <div>
+                  <Label htmlFor="adminCode">Admin Security Code</Label>
+                  <div className="mt-1">
+                    <Input
+                      id="adminCode"
+                      name="adminCode"
+                      type="password"
+                      placeholder="Enter admin code"
+                      value={adminCode}
+                      onChange={(e) => setAdminCode(e.target.value)}
+                      required
+                      className="dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
+                  </div>
+                </div>
+              )}
               
               <div>
                 <Label htmlFor="phone">Phone Number</Label>
@@ -214,6 +270,7 @@ const LoginForm = () => {
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     required
+                    className="dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   />
                 </div>
               </div>
@@ -229,6 +286,7 @@ const LoginForm = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   />
                 </div>
               </div>
@@ -240,13 +298,13 @@ const LoginForm = () => {
                     checked={rememberMe}
                     onCheckedChange={(checked) => setRememberMe(checked as boolean)}
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-khwela-slate">
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-khwela-slate dark:text-gray-300">
                     Remember me
                   </label>
                 </div>
 
                 <div className="text-sm">
-                  <Link to="/forgot-password" className="font-medium text-khwela-blue hover:text-khwela-blue/80">
+                  <Link to="/forgot-password" className="font-medium text-khwela-blue hover:text-khwela-blue/80 dark:text-khwela-light dark:hover:text-khwela-light/80">
                     Forgot your password?
                   </Link>
                 </div>
@@ -255,14 +313,14 @@ const LoginForm = () => {
               <div className="space-y-4">
                 <Button
                   type="button"
-                  className="w-full bg-khwela-blue hover:bg-khwela-blue/90"
+                  className="w-full bg-khwela-blue hover:bg-khwela-blue/90 text-white"
                   onClick={handleLogin}
                 >
                   <LogIn size={16} className="mr-2" />
                   Sign In with Password
                 </Button>
                 
-                {userType === "driver" && (
+                {userType === "driver" && !isAdminMode && (
                   <Button
                     type="button"
                     className="w-full bg-khwela-gold text-khwela-dark hover:bg-khwela-gold/90"
@@ -273,31 +331,35 @@ const LoginForm = () => {
                   </Button>
                 )}
                 
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300"></div>
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-khwela-slate">Or</span>
-                  </div>
-                </div>
-                
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full border-khwela-blue text-khwela-blue hover:bg-khwela-light"
-                  onClick={requestOtp}
-                >
-                  <Smartphone size={16} className="mr-2" />
-                  Sign In with OTP
-                </Button>
+                {!isAdminMode && (
+                  <>
+                    <div className="relative">
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                      </div>
+                      <div className="relative flex justify-center text-sm">
+                        <span className="px-2 bg-white text-khwela-slate dark:bg-gray-800 dark:text-gray-400">Or</span>
+                      </div>
+                    </div>
+                    
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full border-khwela-blue text-khwela-blue hover:bg-khwela-light dark:border-khwela-light dark:text-khwela-light dark:hover:bg-gray-700"
+                      onClick={requestOtp}
+                    >
+                      <Smartphone size={16} className="mr-2" />
+                      Sign In with OTP
+                    </Button>
+                  </>
+                )}
               </div>
             </form>
           ) : (
             <div className="space-y-6">
               <div>
                 <Label htmlFor="otp">Enter Verification Code</Label>
-                <p className="text-sm text-khwela-slate mt-1">
+                <p className="text-sm text-khwela-slate dark:text-gray-400 mt-1">
                   We've sent a 4-digit code to {phoneNumber}
                 </p>
                 <div className="mt-3">
@@ -312,7 +374,7 @@ const LoginForm = () => {
                         value={otp[index]}
                         onChange={(e) => handleOtpChange(index, e.target.value)}
                         onKeyDown={(e) => handleKeyDown(index, e)}
-                        className="h-14 text-xl text-center w-1/4"
+                        className="h-14 text-xl text-center w-1/4 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                       />
                     ))}
                   </div>
@@ -322,7 +384,7 @@ const LoginForm = () => {
               <div className="space-y-4">
                 <Button
                   type="button"
-                  className="w-full bg-khwela-blue hover:bg-khwela-blue/90"
+                  className="w-full bg-khwela-blue hover:bg-khwela-blue/90 text-white"
                   onClick={verifyOtp}
                   disabled={otp.some(digit => digit === "")}
                 >
@@ -332,7 +394,7 @@ const LoginForm = () => {
                 <div className="text-center">
                   <button
                     type="button"
-                    className="text-sm font-medium text-khwela-blue hover:text-khwela-blue/80"
+                    className="text-sm font-medium text-khwela-blue hover:text-khwela-blue/80 dark:text-khwela-light dark:hover:text-khwela-light/80"
                     onClick={() => setIsOtpMode(false)}
                   >
                     Back to Login
@@ -342,7 +404,7 @@ const LoginForm = () => {
                 <div className="text-center">
                   <button
                     type="button"
-                    className="text-sm font-medium text-khwela-blue hover:text-khwela-blue/80"
+                    className="text-sm font-medium text-khwela-blue hover:text-khwela-blue/80 dark:text-khwela-light dark:hover:text-khwela-light/80"
                   >
                     Didn't receive code? Resend
                   </button>
@@ -351,29 +413,31 @@ const LoginForm = () => {
             </div>
           )}
           
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-khwela-slate">New to Khwela?</span>
-              </div>
-            </div>
-            
+          {!isAdminMode && (
             <div className="mt-6">
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full border-khwela-gold text-khwela-blue bg-khwela-gold/10 hover:bg-khwela-gold/20"
-                asChild
-              >
-                <Link to={userType === "rider" ? "/rider-signup" : "/signup"}>
-                  Sign Up as {userType === "rider" ? "Rider" : "Driver"}
-                </Link>
-              </Button>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-khwela-slate dark:bg-gray-800 dark:text-gray-400">New to Khwela?</span>
+                </div>
+              </div>
+              
+              <div className="mt-6">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full border-khwela-gold text-khwela-blue bg-khwela-gold/10 hover:bg-khwela-gold/20 dark:text-khwela-light dark:border-khwela-gold/70 dark:bg-khwela-gold/5 dark:hover:bg-khwela-gold/10"
+                  asChild
+                >
+                  <Link to={userType === "rider" ? "/rider-signup" : "/signup"}>
+                    Sign Up as {userType === "rider" ? "Rider" : "Driver"}
+                  </Link>
+                </Button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
