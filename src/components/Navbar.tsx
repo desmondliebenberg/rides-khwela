@@ -21,7 +21,10 @@ const Navbar = () => {
   } = useNavbar();
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled || alwaysScrolled ? "py-2 bg-white/95 backdrop-blur-md shadow-md dark:bg-khwela-slate/95 dark:shadow-gray-900/30" : "py-4 bg-transparent"}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 
+      ${scrolled || alwaysScrolled 
+        ? "py-2 bg-white/95 backdrop-blur-md shadow-md dark:bg-khwela-dark/95 dark:shadow-gray-900/30" 
+        : "py-4 bg-transparent"}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}

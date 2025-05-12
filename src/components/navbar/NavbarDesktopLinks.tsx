@@ -14,30 +14,32 @@ const NavbarDesktopLinks = ({
   isLoggedIn, 
   userType 
 }: NavbarDesktopLinksProps) => {
+  const linkClass = `font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate dark:text-white' : 'text-white'} hover:text-khwela-gold transition-colors`;
+  
   return (
     <div className="flex space-x-6">
       {/* Home Link */}
-      <Link to="/" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
+      <Link to="/" className={linkClass}>
         Home
       </Link>
       
       {/* Driver Link */}
-      <Link to="/driver-info" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
+      <Link to="/driver-info" className={linkClass}>
         Driver
       </Link>
       
       {/* Rider Link */}
-      <Link to="/rider-info" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
+      <Link to="/rider-info" className={linkClass}>
         Rider
       </Link>
       
       {/* FAQ Link */}
-      <Link to="/faq" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
+      <Link to="/faq" className={linkClass}>
         FAQ
       </Link>
       
       {/* Support Link */}
-      <Link to="/support" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
+      <Link to="/support" className={linkClass}>
         Support
       </Link>
       
@@ -45,17 +47,17 @@ const NavbarDesktopLinks = ({
       {isLoggedIn && (
         <>
           {userType === "driver" && (
-            <Link to="/driver-dashboard" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
+            <Link to="/driver-dashboard" className={linkClass}>
               Dashboard
             </Link>
           )}
           {userType === "rider" && (
-            <Link to="/rider-dashboard" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
+            <Link to="/rider-dashboard" className={linkClass}>
               Dashboard
             </Link>
           )}
           {userType === "admin" && (
-            <Link to="/admin-dashboard" className={`font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`}>
+            <Link to="/admin-dashboard" className={linkClass}>
               Admin
             </Link>
           )}

@@ -19,12 +19,30 @@ const NavbarThemeToggle = ({
       <Switch 
         checked={theme === "dark"}
         onCheckedChange={toggleTheme}
-        className="data-[state=checked]:bg-khwela-blue"
+        className="data-[state=checked]:bg-khwela-blue dark:data-[state=checked]:bg-khwela-gold"
       />
       {theme === "dark" ? (
-        <Moon size={16} className={`${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`} />
+        <Moon 
+          size={16} 
+          className={`
+            ${scrolled || alwaysScrolled 
+              ? 'text-khwela-slate dark:text-white' 
+              : 'text-white'
+            } 
+            hover:text-khwela-gold transition-colors
+          `} 
+        />
       ) : (
-        <Sun size={16} className={`${scrolled || alwaysScrolled ? 'text-khwela-slate' : 'text-white'} hover:text-khwela-gold transition-colors`} />
+        <Sun 
+          size={16} 
+          className={`
+            ${scrolled || alwaysScrolled 
+              ? 'text-khwela-slate dark:text-white' 
+              : 'text-white'
+            } 
+            hover:text-khwela-gold transition-colors
+          `} 
+        />
       )}
     </div>
   );

@@ -20,7 +20,7 @@ const AdminDashboardPage = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen dark:bg-gray-900">
+    <div className="min-h-screen dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
       <div className="pt-20">
         <AdminDashboard />

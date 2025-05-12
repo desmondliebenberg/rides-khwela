@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 const PopiaCompliancePage = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
       <PopiaCompliance />
       <Footer />
