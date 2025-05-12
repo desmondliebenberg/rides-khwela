@@ -14,10 +14,10 @@ const NavbarDesktopLinks = ({
   isLoggedIn, 
   userType 
 }: NavbarDesktopLinksProps) => {
-  const linkClass = `font-medium text-sm md:text-base whitespace-nowrap ${scrolled || alwaysScrolled ? 'text-khwela-slate dark:text-white' : 'text-white'} hover:text-khwela-gold transition-colors`;
+  const linkClass = `font-medium text-sm whitespace-nowrap px-3 ${scrolled || alwaysScrolled ? 'text-khwela-slate dark:text-white' : 'text-white'} hover:text-khwela-gold transition-colors`;
   
   return (
-    <div className="flex md:space-x-3 lg:space-x-6">
+    <div className="flex space-x-1 md:space-x-1 lg:space-x-3">
       {/* Home Link */}
       <Link to="/" className={linkClass}>
         Home

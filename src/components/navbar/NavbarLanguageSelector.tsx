@@ -20,8 +20,8 @@ const NavbarLanguageSelector = ({
   return (
     <div className="relative group">
       <button className={`flex items-center gap-1 font-medium ${scrolled || alwaysScrolled ? 'text-khwela-slate dark:text-white' : 'text-white'} hover:text-khwela-gold transition-colors`}>
-        <Globe size={16} />
-        <span className="hidden lg:inline">{language}</span>
+        <Globe size={14} />
+        <span className="hidden xl:inline text-sm">{language}</span>
       </button>
       <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg overflow-hidden z-50 origin-top-right scale-0 group-hover:scale-100 transition-transform duration-150">
         {languages.map(lang => (

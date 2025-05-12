@@ -20,13 +20,13 @@ const NavbarAuth = () => {
   };
 
   return (
-    <div className="flex items-center space-x-2 md:space-x-3">
+    <div className="flex items-center gap-2 ml-2">
       {/* Ride Button */}
       <Button 
-        className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 flex items-center px-2 md:px-3 text-sm md:text-base"
+        className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 flex items-center px-2 text-sm"
         onClick={handleRideClick}
       >
-        <MapPin size={16} className="mr-1" />
+        <MapPin size={14} className="mr-1" />
         <span className="hidden xs:inline">Ride</span>
       </Button>
 
@@ -37,16 +37,16 @@ const NavbarAuth = () => {
         />
       ) : (
         <>
-          <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 px-2 md:px-3 text-sm md:text-base" asChild>
+          <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 px-2 text-sm" asChild>
             <Link to="/login">Log In</Link>
           </Button>
           
           {/* Sign Up Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 px-2 md:px-3 text-sm md:text-base">
+              <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 px-2 text-sm">
                 Sign Up
-                <ChevronDown className="ml-1 h-4 w-4" />
+                <ChevronDown className="ml-1 h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50 dark:bg-gray-800 dark:border-gray-700">

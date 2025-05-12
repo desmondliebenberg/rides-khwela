@@ -23,15 +23,15 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 
       ${scrolled || alwaysScrolled 
-        ? "py-2 bg-white/95 backdrop-blur-md shadow-md dark:bg-khwela-dark/95 dark:shadow-gray-900/30" 
+        ? "py-3 bg-white/95 backdrop-blur-md shadow-md dark:bg-khwela-dark/95 dark:shadow-gray-900/30" 
         : "py-4 bg-transparent"}`}>
-      <div className="container mx-auto px-2 sm:px-4">
+      <div className="container mx-auto px-3 sm:px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <NavbarLogo scrolled={scrolled} alwaysScrolled={alwaysScrolled} />
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center md:space-x-3 lg:space-x-8">
+          <div className="hidden md:flex items-center md:space-x-4 lg:space-x-8">
             {/* Desktop Links */}
             <NavbarDesktopLinks 
               scrolled={scrolled} 
@@ -40,7 +40,7 @@ const Navbar = () => {
               userType={userType}
             />
             
-            <div className="flex items-center md:space-x-3 lg:space-x-8">
+            <div className="flex items-center md:space-x-5 lg:space-x-8">
               {/* Theme Toggle */}
               <NavbarThemeToggle
                 scrolled={scrolled}

@@ -61,12 +61,12 @@ const UserProfileDropdown = ({
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button 
-          className="bg-khwela-blue text-white hover:bg-khwela-blue/90 flex items-center gap-1 px-2 md:px-3 text-sm md:text-base truncate max-w-[120px] md:max-w-none"
+          className="bg-khwela-blue text-white hover:bg-khwela-blue/90 flex items-center gap-1 px-2 text-sm truncate max-w-[80px] sm:max-w-[120px] md:max-w-none"
           aria-label="User menu"
         >
           <span className="hidden sm:inline-block truncate">{firstName}</span>
           <span className="inline-block sm:hidden">Hi</span>
-          <ChevronDown className="h-4 w-4 flex-shrink-0" />
+          <ChevronDown className="h-3 w-3 flex-shrink-0" />
         </Button>
       </DropdownMenuTrigger>
       
