@@ -19,7 +19,7 @@ const NavbarThemeToggle = ({
       <Switch 
         checked={theme === "dark"}
         onCheckedChange={toggleTheme}
-        className="data-[state=checked]:bg-khwela-blue dark:data-[state=checked]:bg-khwela-gold"
+        className="data-[state=checked]:bg-khwela-blue dark:data-[state=checked]:bg-khwela-gold h-4 w-8"
       />
       {theme === "dark" ? (
         <Moon 

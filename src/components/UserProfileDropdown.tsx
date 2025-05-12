@@ -61,19 +61,19 @@ const UserProfileDropdown = ({
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button 
-          className="bg-khwela-blue text-white hover:bg-khwela-blue/90 flex items-center gap-2"
+          className="bg-khwela-blue text-white hover:bg-khwela-blue/90 flex items-center gap-1 px-2 md:px-3 text-sm md:text-base truncate max-w-[120px] md:max-w-none"
           aria-label="User menu"
         >
-          <span className="hidden sm:inline-block">Welcome, {firstName}</span>
-          <span className="inline-block sm:hidden">Hi, {firstName}</span>
-          <ChevronDown className="h-4 w-4" />
+          <span className="hidden sm:inline-block truncate">{firstName}</span>
+          <span className="inline-block sm:hidden">Hi</span>
+          <ChevronDown className="h-4 w-4 flex-shrink-0" />
         </Button>
       </DropdownMenuTrigger>
       
-      <DropdownMenuContent align="end" className="w-[280px] p-0">
-        <Card className="border-0 shadow-none">
+      <DropdownMenuContent align="end" className="w-[280px] p-0 dark:bg-gray-800 dark:border-gray-700">
+        <Card className="border-0 shadow-none dark:bg-gray-800">
           <DropdownMenuProfile>
-            <Avatar className="h-12 w-12 border-2 border-khwela-light">
+            <Avatar className="h-12 w-12 border-2 border-khwela-light dark:border-gray-600">
               <AvatarImage src={profileImage} alt={userName} />
               <AvatarFallback className="bg-khwela-gold text-khwela-blue">
                 {userName.split(' ').map(name => name[0]).join('').toUpperCase()}
@@ -81,45 +81,45 @@ const UserProfileDropdown = ({
             </Avatar>
             
             <div className="flex flex-col">
-              <span className="font-semibold text-base">{userName}</span>
-              <span className="text-xs text-gray-500 capitalize">{userType}</span>
+              <span className="font-semibold text-base dark:text-white">{userName}</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 capitalize">{userType}</span>
               {userType === "driver" && <DropdownMenuRating rating={userRating} />}
             </div>
           </DropdownMenuProfile>
           
-          <DropdownMenuSeparator />
+          <DropdownMenuSeparator className="dark:bg-gray-700" />
           
           <div className="grid grid-cols-3 gap-1 p-2">
             <button 
               onClick={() => navigateTo('/support')}
-              className="flex flex-col items-center p-2 rounded-md hover:bg-gray-100"
+              className="flex flex-col items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
             >
-              <HelpCircle className="h-5 w-5 text-khwela-blue mb-1" />
-              <span className="text-xs">Help</span>
+              <HelpCircle className="h-5 w-5 text-khwela-blue dark:text-khwela-light mb-1" />
+              <span className="text-xs dark:text-gray-300">Help</span>
             </button>
             
             <button 
               onClick={() => navigateTo(`/${userType}-dashboard/wallet`)}
-              className="flex flex-col items-center p-2 rounded-md hover:bg-gray-100"
+              className="flex flex-col items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
             >
-              <Wallet className="h-5 w-5 text-khwela-blue mb-1" />
-              <span className="text-xs">Wallet</span>
+              <Wallet className="h-5 w-5 text-khwela-blue dark:text-khwela-light mb-1" />
+              <span className="text-xs dark:text-gray-300">Wallet</span>
             </button>
             
             <button 
               onClick={() => navigateTo(`/${userType}-dashboard/history`)}
-              className="flex flex-col items-center p-2 rounded-md hover:bg-gray-100"
+              className="flex flex-col items-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
             >
-              <History className="h-5 w-5 text-khwela-blue mb-1" />
-              <span className="text-xs">{userType === "driver" ? "Activity" : "Rides"}</span>
+              <History className="h-5 w-5 text-khwela-blue dark:text-khwela-light mb-1" />
+              <span className="text-xs dark:text-gray-300">{userType === "driver" ? "Activity" : "Rides"}</span>
             </button>
           </div>
           
-          <DropdownMenuSeparator />
+          <DropdownMenuSeparator className="dark:bg-gray-700" />
           
           <div className="p-2">
-            <DropdownMenuItem onClick={() => navigateTo(`/${userType}-dashboard`)}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-khwela-blue">
+            <DropdownMenuItem onClick={() => navigateTo(`/${userType}-dashboard`)} className="dark:hover:bg-gray-700 dark:text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-khwela-blue dark:text-khwela-light">
                 <rect x="3" y="3" width="7" height="7" rx="1" />
                 <rect x="14" y="3" width="7" height="7" rx="1" />
                 <rect x="14" y="14" width="7" height="7" rx="1" />
@@ -128,8 +128,8 @@ const UserProfileDropdown = ({
               Dashboard
             </DropdownMenuItem>
             
-            <DropdownMenuItem onClick={() => navigateTo(`/${userType}-dashboard/refer`)}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-khwela-blue">
+            <DropdownMenuItem onClick={() => navigateTo(`/${userType}-dashboard/refer`)} className="dark:hover:bg-gray-700 dark:text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-khwela-blue dark:text-khwela-light">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
                 <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
@@ -138,22 +138,22 @@ const UserProfileDropdown = ({
               Refer & Earn
             </DropdownMenuItem>
             
-            <DropdownMenuItem onClick={() => navigateTo(`/${userType}-dashboard/account`)}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-khwela-blue">
+            <DropdownMenuItem onClick={() => navigateTo(`/${userType}-dashboard/account`)} className="dark:hover:bg-gray-700 dark:text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-khwela-blue dark:text-khwela-light">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
               Manage Account
             </DropdownMenuItem>
             
-            <DropdownMenuItem onClick={() => navigateTo(`/${userType}-dashboard/settings`)}>
-              <Settings className="mr-2 h-4 w-4 text-khwela-blue" />
+            <DropdownMenuItem onClick={() => navigateTo(`/${userType}-dashboard/settings`)} className="dark:hover:bg-gray-700 dark:text-gray-300">
+              <Settings className="mr-2 h-4 w-4 text-khwela-blue dark:text-khwela-light" />
               Settings
             </DropdownMenuItem>
             
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="dark:bg-gray-700" />
             
-            <DropdownMenuItem onClick={handleLogout} className="text-red-500 focus:text-red-500">
+            <DropdownMenuItem onClick={handleLogout} className="text-red-500 focus:text-red-500 dark:text-red-400 dark:focus:text-red-400 dark:hover:bg-gray-700">
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </DropdownMenuItem>

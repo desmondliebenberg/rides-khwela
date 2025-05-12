@@ -20,14 +20,14 @@ const NavbarAuth = () => {
   };
 
   return (
-    <div className="flex items-center space-x-3">
+    <div className="flex items-center space-x-2 md:space-x-3">
       {/* Ride Button */}
       <Button 
-        className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 flex items-center"
+        className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 flex items-center px-2 md:px-3 text-sm md:text-base"
         onClick={handleRideClick}
       >
         <MapPin size={16} className="mr-1" />
-        Ride
+        <span className="hidden xs:inline">Ride</span>
       </Button>
 
       {isLoggedIn ? (
@@ -37,27 +37,27 @@ const NavbarAuth = () => {
         />
       ) : (
         <>
-          <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90" asChild>
+          <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 px-2 md:px-3 text-sm md:text-base" asChild>
             <Link to="/login">Log In</Link>
           </Button>
           
           {/* Sign Up Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90">
+              <Button className="bg-khwela-gold text-khwela-blue hover:bg-khwela-gold/90 px-2 md:px-3 text-sm md:text-base">
                 Sign Up
                 <ChevronDown className="ml-1 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50">
+            <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-md shadow-md border border-gray-200 rounded-md min-w-[180px] z-50 dark:bg-gray-800 dark:border-gray-700">
               <DropdownMenuItem asChild>
-                <Link to="/rider-signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                <Link to="/rider-signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer dark:text-white dark:hover:bg-gray-700">
                   <User className="mr-2 h-4 w-4" />
                   <span>For Riders</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer">
+                <Link to="/signup" className="flex w-full px-3 py-2 text-khwela-slate hover:bg-gray-100 rounded-sm cursor-pointer dark:text-white dark:hover:bg-gray-700">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
